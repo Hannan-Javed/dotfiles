@@ -7,6 +7,9 @@
 # Allow .config
 !.config/
 
+# Allow README
+!README.md
+
 # Standlone config files
 !.config/mimeapps.list
 !/.bashrc
