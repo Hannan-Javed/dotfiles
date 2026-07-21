@@ -1,0 +1,5 @@
+[Default Applications]
+application/pdf=firefox-3.desktop;
+image/jpeg=org.kde.gwenview.desktop;
+image/png=org.kde.gwenview.desktop;
+video/mp4=mpv-3.desktop;

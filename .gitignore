@@ -1,0 +1,29 @@
+# Ignore everything
+*
+
+# Dont ignore .gitignore itself
+!.gitignore
+
+# Allow .config
+!.config/
+
+# Standlone config files
+!.config/mimeapps.list
+!/.bashrc
+
+
+# Config directories
+!.config/fontconfig/
+!.config/fontconfig/**
+
+!.config/hypr/
+!.config/hypr/**
+
+!.config/kitty/
+!.config/kitty/**
+
+!.config/waybar/
+!.config/waybar/**
+
+!.config/waypaper/
+!.config/waypaper/**
