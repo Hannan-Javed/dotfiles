@@ -22,20 +22,16 @@
         "custom/media",
         "backlight",
         "custom/hyprsunset",
-        "custom/separator",
         "pulseaudio",
-        "custom/separator",
+        "bluetooth",
+        "custom/seperator",
         "network",
-        "custom/separator",
         "power-profiles-daemon",
-        "custom/separator",
         "cpu",
         "memory",
         "temperature",
-        "custom/separator",
         "battery",
         "battery#bat2",
-        "custom/separator",
         "custom/power"
     ],
     // Modules configuration
@@ -191,6 +187,15 @@
             "default": ["", "", ""]
         },
         "on-click": "pavucontrol"
+    },
+    "bluetooth": {
+        "format": " {status}",
+        "format-disabled": " off",
+        "format-off": " off",
+        "format-on": " on",
+        "format-connected": " {device_alias}",
+        "format-connected-battery": " {device_alias}   {device_battery_percentage}%",
+        "on-click": "~/.config/waybar/scripts/bluetooth-toggle.sh"
     },
     // maybe later
     // "custom/media": {
