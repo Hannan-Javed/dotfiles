@@ -252,6 +252,28 @@ hl.gesture({
     scale = 0.9
 })
 
+-- Volume gesture
+local volume_gesture = function(change) hl.exec_cmd("wpctl set-volume --limit 1.0 @DEFAULT_AUDIO_SINK@ " .. math.abs(change) .. "%" .. (change<0 and "-" or "+")) end
+hl.gesture({
+  fingers = 3,
+  direction = "vertical",
+  action = {
+    start = function(e) volume_gesture(-0.25 * e.delta.y) end,
+    update = function(e) volume_gesture(-0.25 * e.delta.y) end
+  },
+})
+
+-- Brightness gesture
+local brightness_gesture = function(change) hl.exec_cmd("brightnessctl -e4 -n2 set " .. math.abs(change) .. "%" .. (change<0 and "-" or "+")) end
+hl.gesture({
+  fingers = 4,
+  direction = "vertical",
+  action = {
+    start = function(e) brightness_gesture(-0.25 * e.delta.y) end,
+    update = function(e) brightness_gesture(-0.25 * e.delta.y) end
+  },
+})
+
 -- Example per-device config
 -- See https://wiki.hypr.land/Configuring/Advanced-and-Cool/Devices/ for more
 hl.device({
