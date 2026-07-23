@@ -248,7 +248,8 @@ hl.config({
 hl.gesture({
     fingers = 3,
     direction = "horizontal",
-    action = "workspace"
+    action = "workspace",
+    scale = 0.9
 })
 
 -- Example per-device config
