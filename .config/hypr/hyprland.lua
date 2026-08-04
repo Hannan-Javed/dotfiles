@@ -301,8 +301,6 @@ hl.bind(mainMod .. " + J", hl.dsp.layout("togglesplit"))    -- dwindle only
 hl.bind(mainMod .. " + B", hl.dsp.exec_cmd(browser .. " -P Personal"))
 hl.bind(mainMod .. " + SHIFT + B", hl.dsp.exec_cmd(browser .. " -P Work"))
 hl.bind(mainMod .. " + Z", hl.dsp.exec_cmd(ide))
--- to be removed later
-hl.bind(mainMod .. " + SHIFT + Z", hl.dsp.exec_cmd(ide .. " '/home/hannan/My Files/financial/'"))
 
 -- Move focus with mainMod + arrow keys
 hl.bind(mainMod .. " + left",  hl.dsp.focus({ direction = "left" }))
@@ -346,6 +344,8 @@ hl.bind("XF86AudioPrev",  hl.dsp.exec_cmd("playerctl previous"),   { locked = tr
 
 -- Screenshots
 hl.bind(mainMod .. " + S", hl.dsp.exec_cmd("grimblast copy area"))
+-- Launch pcloud
+hl.bind(mainMod .. " + C", hl.dsp.exec_cmd("setsid gio launch ~/.config/autostart/pcloud.desktop"))
 
 
 --------------------------------
