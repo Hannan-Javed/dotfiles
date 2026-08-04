@@ -298,7 +298,8 @@ hl.bind(mainMod .. " + V", hl.dsp.window.float({ action = "toggle" }))
 hl.bind(mainMod .. " + R", hl.dsp.exec_cmd(menu))
 hl.bind(mainMod .. " + P", hl.dsp.window.pseudo())
 hl.bind(mainMod .. " + J", hl.dsp.layout("togglesplit"))    -- dwindle only
-hl.bind(mainMod .. " + B", hl.dsp.exec_cmd(browser))
+hl.bind(mainMod .. " + B", hl.dsp.exec_cmd(browser .. " -P Personal"))
+hl.bind(mainMod .. " + SHIFT + B", hl.dsp.exec_cmd(browser .. " -P Work"))
 hl.bind(mainMod .. " + Z", hl.dsp.exec_cmd(ide))
 -- to be removed later
 hl.bind(mainMod .. " + SHIFT + Z", hl.dsp.exec_cmd(ide .. " '/home/hannan/My Files/financial/'"))
