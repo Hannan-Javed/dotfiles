@@ -53,7 +53,7 @@ local ide         = "codium"
 --
 hl.on("hyprland.start", function () 
   hl.exec_cmd("nm-applet")
-  hl.exec_cmd("waybar & waypaper --restore")
+  hl.exec_cmd("waybar & waypaper --restore & wayscriber -d")
 --   hl.exec_cmd("~/.config/pCloud.AppImage")
 end)
 
@@ -346,6 +346,8 @@ hl.bind("XF86AudioPrev",  hl.dsp.exec_cmd("playerctl previous"),   { locked = tr
 hl.bind(mainMod .. " + S", hl.dsp.exec_cmd("grimblast copy area"))
 -- Launch pcloud
 hl.bind(mainMod .. " + C", hl.dsp.exec_cmd("setsid gio launch ~/.config/autostart/pcloud.desktop"))
+-- For annotations
+hl.bind(mainMod .. " + W", hl.dsp.exec_cmd("wayscriber --daemon-toggle"))
 
 
 --------------------------------
