@@ -15,19 +15,22 @@
 ------------------
 
 -- See https://wiki.hypr.land/Configuring/Basics/Monitors/
-hl.monitor({
-    output   = "",
+local internal = {
+    output   = "eDP-2",
     mode     = "preferred",
     position = "auto",
     scale    = "1.6",
-    -- disabled = true -- for second-screen only
-})
--- hl.monitor({
---     output   = "HDMI-A-1",
---     mode     = "1920x1080",
---     position = "auto",
---     scale    = "1",
--- })
+}
+
+local external = {
+    output   = "HDMI-A-1",
+    mode     = "1920x1080@144",
+    position = "auto",
+    scale    = 1
+}
+
+hl.monitor(internal)
+hl.monitor(external)
 
 
 ---------------------
@@ -287,6 +290,14 @@ hl.device({
 ---------------------
 
 local mainMod = "SUPER" -- Sets "Windows" key as main modifier
+
+local disableInternal = false
+
+hl.bind(mainMod .. " + F2", function()
+    hl.monitor({ output = internal.output, disabled = not disableInternal })
+    disableInternal = not disableInternal
+end)
+
 
 -- Example binds, see https://wiki.hypr.land/Configuring/Basics/Binds/ for more
 hl.bind(mainMod .. " + RETURN", hl.dsp.exec_cmd(terminal))
