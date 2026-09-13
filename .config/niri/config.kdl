@@ -618,8 +618,8 @@ binds {
     Mod+Shift+Equal { set-window-height "+10%"; }
 
     // Move the focused window between the floating and the tiling layout.
-    Mod+V       { toggle-window-floating; }
-    Mod+Shift+V { switch-focus-between-floating-and-tiling; }
+    Mod+S      { toggle-window-floating; }
+    Mod+Shift+S { switch-focus-between-floating-and-tiling; }
 
     // Toggle tabbed column display mode.
     // Windows in this column will appear as vertical tabs,
@@ -663,8 +663,8 @@ binds {
     Mod+E hotkey-overlay-title="Open File Manager" { spawn "dolphin"; }
     Mod+Z hotkey-overlay-title="Open IDE" { spawn "codium"; }
     Mod+A hotkey-overlay-title="Open pCloud" { spawn-sh "wayscriber -d & wayscriber --daemon-toggle"; }
-    Mod+C hotkey-overlay-title="Launch/Close Waysrciber" { spawn-sh "setsid gio launch ~/.config/autostart/pcloud.desktop"; }
-
+    Mod+C hotkey-overlay-title="Launch/Close Wayscriber" { spawn-sh "setsid gio launch ~/.config/autostart/pcloud.desktop"; }
+    Mod+V hotkey-overlay-title="Open Shotcut" { spawn "~/Downloads/Shotcut.app/shotcut"; }
 
     // monitor disabling
 
