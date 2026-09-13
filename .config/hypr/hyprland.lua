@@ -56,7 +56,7 @@ local ide         = "codium"
 --
 hl.on("hyprland.start", function () 
   hl.exec_cmd("nm-applet")
-  hl.exec_cmd("waybar & waypaper --restore & wayscriber -d")
+  hl.exec_cmd("waybar & awww-daemon & wayscriber -d")
 --   hl.exec_cmd("~/.config/pCloud.AppImage")
 end)
 
