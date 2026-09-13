@@ -285,7 +285,7 @@ layout {
 spawn-at-startup "waybar"
 spawn-sh-at-startup "awww-daemon"
 spawn-sh-at-startup "swaybg -m fill -i ~/Wallpapers/berserk38-blur.jpg"
-spawn-at-startup "wayscriber -d"
+spawn-sh-at-startup "sleep 1 & wayscriber -d"
 
 
 // To run a shell command (with variables, pipes, etc.), use spawn-sh-at-startup:
@@ -394,7 +394,7 @@ binds {
 
     // Use spawn-sh to run a shell command. Do this if you need pipes, multiple commands, etc.
     // Note: the entire command goes as a single argument. It's passed verbatim to `sh -c`.
-    Super+Shift+Z allow-when-locked=true hotkey-overlay-title=null { spawn-sh "codium ~/Files/financial"; }
+    Super+Shift+Z hotkey-overlay-title=null { spawn-sh "codium ~/Files/financial"; }
 
     // Example volume keys mappings for PipeWire & WirePlumber.
     // The allow-when-locked=true property makes them work even when the session is locked.
@@ -597,10 +597,10 @@ binds {
     // Makes the column "fill the rest of the space".
     Mod+Ctrl+F { expand-column-to-available-width; }
 
-    Mod+C { center-column; }
+    Mod+X { center-column; }
 
     // Center all fully visible columns on screen.
-    Mod+Ctrl+C { center-visible-columns; }
+    Mod+Ctrl+X { center-visible-columns; }
 
     // Finer width adjustments.
     // This command can also:
@@ -662,6 +662,8 @@ binds {
     Mod+Shift+B hotkey-overlay-title="Open Firefox (Work Profile)" { spawn-sh "firefox -P Work"; }
     Mod+E hotkey-overlay-title="Open File Manager" { spawn "dolphin"; }
     Mod+Z hotkey-overlay-title="Open IDE" { spawn "codium"; }
+    Mod+A hotkey-overlay-title="Open pCloud" { spawn-sh "wayscriber -d & wayscriber --daemon-toggle"; }
+    Mod+C hotkey-overlay-title="Launch/Close Waysrciber" { spawn-sh "setsid gio launch ~/.config/autostart/pcloud.desktop"; }
 
 
     // monitor disabling
