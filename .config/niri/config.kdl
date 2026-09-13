@@ -281,9 +281,9 @@ layout {
 // See the binds section below for more spawn examples.
 
 spawn-at-startup "waybar"
-spawn-sh-at-startup "sleep 1 & awww-daemon"
-spawn-sh-at-startup "sleep 1 & swaybg -m fill -i ~/Wallpapers/berserk38-blur.jpg"
-spawn-at-startup "sleep 1 & wayscriber -d"
+spawn-sh-at-startup "awww-daemon"
+spawn-sh-at-startup "swaybg -m fill -i ~/Wallpapers/berserk38-blur.jpg"
+spawn-at-startup "wayscriber -d"
 
 
 // To run a shell command (with variables, pipes, etc.), use spawn-sh-at-startup:
