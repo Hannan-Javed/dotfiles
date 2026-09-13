@@ -669,7 +669,7 @@ binds {
     // monitor disabling
 
     // Toggle eDP-2 (internal display) on and off with F2
-    Super+F2 { spawn-sh "niri msg outputs | grep eDP-2 -n2 | grep Disabled -q && niri msg output eDP-2 on || niri msg output eDP-2 off"; }
+    Super+F2 hotkey-overlay-title="Disable Internal Monitor" { spawn-sh "niri msg outputs | grep eDP-2 -n2 | grep Disabled -q && niri msg output eDP-2 on || niri msg output eDP-2 off"; }
 
 }
 
