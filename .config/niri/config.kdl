@@ -105,15 +105,25 @@ output "eDP-2" {
     // automatically.
     // position x=2560 y=0
 }
+
 output "HDMI-A-1" {
-    // off
-
-    mode "1920x1080@144.001"
-    
+    mode "1920x1080@144.001"    
     scale 1
-
     // transform "normal"
+    // position x=2560 y=0
+}
 
+output "DP-3" {
+    mode "1920x1080@60.000"
+    scale 1
+    // transform "normal"
+    // position x=2560 y=0
+}
+
+output "DP-4" {
+    mode "1024x768@60.000"
+    scale 1
+    // transform "normal"
     // position x=2560 y=0
 }
 
@@ -666,10 +676,16 @@ binds {
     Mod+C hotkey-overlay-title="Launch/Close Wayscriber" { spawn-sh "setsid gio launch ~/.config/autostart/pcloud.desktop"; }
     Mod+V hotkey-overlay-title="Open Shotcut" { spawn "~/Downloads/Shotcut.app/shotcut"; }
 
-    // monitor disabling
+    // monitor enabling/disabling
 
-    // Toggle eDP-2 (internal display) on and off with F2
-    Super+F2 hotkey-overlay-title="Disable Internal Monitor" { spawn-sh "niri msg outputs | grep eDP-2 -n2 | grep Disabled -q && niri msg output eDP-2 on || niri msg output eDP-2 off"; }
+    // Toggle eDP-2 (internal display) on and off with F1
+    Super+F1 hotkey-overlay-title="Disable Internal Monitor" { spawn-sh "niri msg outputs | grep eDP-2 -n2 | grep Disabled -q && niri msg output eDP-2 on || niri msg output eDP-2 off"; }
+    // Toggle HDMI-A-1 (connected monitor) on and off with F2
+    Super+F2 hotkey-overlay-title="Disable HDMI Monitor" { spawn-sh "niri msg outputs | grep HDMI-A-1 -n2 | grep Disabled -q && niri msg output HDMI-A-1 on || niri msg output HDMI-A-1 off"; }
+    // Toggle DP-3 (connected monitor) on and off with F3
+    Super+F3 hotkey-overlay-title="Disable DP Monitor" { spawn-sh "niri msg outputs | grep DP-3 -n2 | grep Disabled -q && niri msg output DP-3 on || niri msg output DP-3 off"; }
+    // Toggle DP-4 (usually projector) on and off with F4
+    Super+F4 hotkey-overlay-title="Disable Projector" { spawn-sh "niri msg outputs | grep DP-4 -n2 | grep Disabled -q && niri msg output DP-4 on || niri msg output DP-4 off"; }
 
 }
 
