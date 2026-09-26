@@ -292,8 +292,13 @@ layout {
 // which may be more convenient to use.
 // See the binds section below for more spawn examples.
 
-spawn-at-startup "waybar"
-spawn-sh-at-startup "awww-daemon"
+environment {
+    QT_QPA_PLATFORM "wayland"
+    GTK_THEME "Adwaita-dark"
+}
+
+spawn-at-startup "qs"
+spawn-sh-at-startup "awww-daemon & awww img ~/Wallpapers/berserk38.jpg --resize crop"
 spawn-sh-at-startup "swaybg -m fill -i ~/Wallpapers/berserk38-blur.jpg"
 spawn-sh-at-startup "sleep 1 & wayscriber -d"
 

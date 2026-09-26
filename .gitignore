@@ -28,6 +28,9 @@
 !.config/kitty/
 !.config/kitty/**
 
+!.config/quickshell/
+!.config/quickshell/**
+
 !.config/waybar/
 !.config/waybar/**
 
