@@ -32,6 +32,13 @@ ShellRoot {
             property bool batteryCharging:
                 bat ? bat.state === UPowerDeviceState.Charging : false
 
+            property int cpuUsage: 0
+            property int memUsage: 0
+
+            property real lastIdle: 0
+            property real lastTotal: 0
+            property bool cpuInitialized: false
+
             function getBatteryIcon() {
                 if (batteryCharging)
                     return "󰂄";
@@ -193,6 +200,86 @@ ShellRoot {
                 }
             }
 
+            // --- 3. CPU MEM USAGE ---
+            Process {
+                id: cpuProc
+
+                command: ["head", "-n", "1", "/proc/stat"]
+
+                stdout: SplitParser {
+                    onRead: data => {
+                        if (!data)
+                            return;
+
+                        let parts = data.trim().split(/\s+/);
+
+                        let idle =
+                            parseFloat(parts[4]) +
+                            parseFloat(parts[5]);
+
+                        let total = 0;
+
+                        for (let i = 1; i < parts.length; i++) {
+                            total += parseFloat(parts[i]);
+                        }
+
+                        if (!barWindow.cpuInitialized) {
+                            barWindow.lastIdle = idle;
+                            barWindow.lastTotal = total;
+                            barWindow.cpuInitialized = true;
+                            return;
+                        }
+
+                        let diffIdle = idle - barWindow.lastIdle;
+                        let diffTotal = total - barWindow.lastTotal;
+
+                        if (diffTotal > 0) {
+                            barWindow.cpuUsage =
+                                Math.round(
+                                    100 * (1 - diffIdle / diffTotal)
+                                );
+                        }
+
+                        barWindow.lastIdle = idle;
+                        barWindow.lastTotal = total;
+                    }
+                }
+            }
+
+            Process {
+                id: memProc
+
+                command: ["sh", "-c", "free | grep Mem"]
+
+                stdout: SplitParser {
+                    onRead: data => {
+                        if (!data)
+                            return;
+
+                        let parts = data.trim().split(/\s+/);
+
+                        let total = parseInt(parts[1]) || 1;
+                        let used = parseInt(parts[2]) || 0;
+
+                        barWindow.memUsage =
+                            Math.round((used * 100) / total);
+                    }
+                }
+            }
+            // update every 2 seconds
+            Timer {
+                interval: 2000
+
+                running: true
+                repeat: true
+                triggeredOnStart: true
+
+                onTriggered: {
+                    cpuProc.running = true;
+                    memProc.running = true;
+                }
+            }
+
 
             // --- BAR LAYOUT UI ---
             Rectangle {
@@ -282,16 +369,52 @@ ShellRoot {
                         verticalCenter: parent.verticalCenter
                     }
                     spacing: 12
+                    // CPU
+                    Row {
+                        anchors.verticalCenter: parent.verticalCenter
+                        Text {
+                            text: "󰍛"
+                            font.family: "JetBrainsMono Nerd Font"
+                            color: "#89b4fa"
+                            font.pixelSize: 18
+                        }
+                        Text {
+                            text: ` ${barWindow.cpuUsage}%`
+                            color: "#cdd6f4"
+                            font.pixelSize: 12
+
+                            anchors.verticalCenter: parent.verticalCenter
+                        }
+                    }
+                    // Memory
+                    Row {
+                        spacing: 4
+                        anchors.verticalCenter: parent.verticalCenter
+                        Text {
+                            text: "󰘚"
+                            font.family: "JetBrainsMono Nerd Font"
+                            color: "#f9e2af"
+                            font.pixelSize: 18
+                        }
+
+                        Text {
+                            text: `${barWindow.memUsage}%`
+                            color: "#cdd6f4"
+                            font.pixelSize: 12
+
+                            anchors.verticalCenter: parent.verticalCenter
+                        }
+                    }
                     //
                     // BATTERY
                     //
                     Row {
-                        spacing: 6
+                        spacing: 4
 
                         Text {
                             text: barWindow.getBatteryIcon()
                             font.family: "JetBrainsMono Nerd Font"
-                            font.pixelSize: 18
+                            font.pixelSize: 17
 
                             color:
                                 barWindow.batteryPercent <= 20 &&
@@ -305,21 +428,6 @@ ShellRoot {
                             font.pixelSize: 13
                             anchors.verticalCenter: parent.verticalCenter
                         }
-                    }
-
-                    //
-                    // Placeholder future widgets
-                    //
-                    Text {
-                        text: "󰍛" // CPU
-                        color: "#cdd6f4"
-                        visible: false
-                    }
-
-                    Text {
-                        text: "󰘚" // MEM
-                        color: "#cdd6f4"
-                        visible: false
                     }
                 }
                 // Smoothly Sliding Clock Component
