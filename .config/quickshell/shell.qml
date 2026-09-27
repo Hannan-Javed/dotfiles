@@ -1,6 +1,7 @@
 import Quickshell
 import Quickshell.Io
 import QtQuick
+import Quickshell.Services.UPower
 
 ShellRoot {
     Variants {
@@ -22,6 +23,33 @@ ShellRoot {
             property var windowsMap: ({}) 
             property int focusedWindowId: 0
             property string focusedWindowTitle: "" // Clear by default to show clock centered initially
+
+            property var bat: UPower.displayDevice
+
+            property real batteryPercent:
+                bat ? bat.percentage * 100 : 0
+
+            property bool batteryCharging:
+                bat ? bat.state === UPowerDeviceState.Charging : false
+
+            function getBatteryIcon() {
+                if (batteryCharging)
+                    return "󰂄";
+
+                if (batteryPercent > 85)
+                    return "󰁹";
+
+                if (batteryPercent > 60)
+                    return "󰂀";
+
+                if (batteryPercent > 40)
+                    return "󰁾";
+
+                if (batteryPercent > 20)
+                    return "󰁻";
+
+                return "󰂎";
+            }
 
             function updateTitle() {
                 if (focusedWindowId === 0) {
@@ -245,6 +273,55 @@ ShellRoot {
                         } 
                     }
                 }
+
+                Row {
+                    id: rightWidgets
+                    anchors {
+                        right: parent.right
+                        rightMargin: 16
+                        verticalCenter: parent.verticalCenter
+                    }
+                    spacing: 12
+                    //
+                    // BATTERY
+                    //
+                    Row {
+                        spacing: 6
+
+                        Text {
+                            text: barWindow.getBatteryIcon()
+                            font.family: "JetBrainsMono Nerd Font"
+                            font.pixelSize: 18
+
+                            color:
+                                barWindow.batteryPercent <= 20 &&
+                                !barWindow.batteryCharging
+                                ? "#f38ba8"
+                                : "#cdd6f4"
+                        }
+                        Text {
+                            text: Math.round(barWindow.batteryPercent) + "%"
+                            color: "#cdd6f4"
+                            font.pixelSize: 13
+                            anchors.verticalCenter: parent.verticalCenter
+                        }
+                    }
+
+                    //
+                    // Placeholder future widgets
+                    //
+                    Text {
+                        text: "󰍛" // CPU
+                        color: "#cdd6f4"
+                        visible: false
+                    }
+
+                    Text {
+                        text: "󰘚" // MEM
+                        color: "#cdd6f4"
+                        visible: false
+                    }
+                }
                 // Smoothly Sliding Clock Component
                 Text {
                     id: dynamicClock
@@ -255,12 +332,12 @@ ShellRoot {
                     font.family: "monospace" // Fixed-width prevents text layout jittering
                     anchors.verticalCenter: parent.verticalCenter// --- DYNAMIC ALIGNMENT CALCULATION ---// Target coordinates: Center of the bar vs Right margin offset
                     property bool isCentered: (barWindow.focusedWindowTitle === "")// Mathematical positions to switch between
-                    property real targetX: isCentered? (parent.width / 2) - (width / 2): parent.width - width - 16
+                    property real targetX: isCentered? (parent.width / 2) - (width / 2): rightWidgets.x - width - 16
                     x: targetX// Smooth physical glide behavior when position parameters swap
                     Behavior on x {
                         NumberAnimation {
                             duration: 1000
-                        easing.type: Easing.OutQuint
+                            easing.type: Easing.OutQuint
                         }
                     }
                 }
