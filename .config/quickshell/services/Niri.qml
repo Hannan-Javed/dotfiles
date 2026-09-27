@@ -9,13 +9,30 @@ Item {
     property int focusedWindowId: 0
     property string focusedWindowTitle: "" // Clear by default to show clock centered initially
 
-    function updateTitle() {
+   function updateTitle() {
         if (focusedWindowId === 0) {
             focusedWindowTitle = "";
             return;
         }
+
         let win = windowsMap[focusedWindowId];
-        focusedWindowTitle = (win && win.title) ? win.title : "";
+
+        if (!win) {
+            focusedWindowTitle = "";
+            return;
+        }
+        // check if app id is like org.kde.xxxx first
+        let parts = win.app_id.split(".");
+        if (parts.length > 1) {
+            focusedWindowTitle = capitalize(parts[parts.length - 1]);
+        } else {
+                focusedWindowTitle =
+                capitalize(win.app_id);
+        }
+    }
+
+    function capitalize(str) {
+        return str.charAt(0).toUpperCase() + str.slice(1);
     }
 
     // for initial processing
