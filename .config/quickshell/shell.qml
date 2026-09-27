@@ -2,6 +2,7 @@ import Quickshell
 import QtQuick
 import "./services"
 import "./widgets"
+import "./widgets/rightWidgets"
 
 ShellRoot {
     

@@ -1,7 +1,7 @@
 import Quickshell
 import QtQuick
 
-import "../services"
+import "../../services"
 
 Row {
     // spacing between system stats
