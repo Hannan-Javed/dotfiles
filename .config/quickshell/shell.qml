@@ -99,6 +99,16 @@ ShellRoot {
                     Battery {
                         id: battery
                     }
+                    PowerButton {
+                        icon: "↻"
+                        command: "systemctl reboot"
+                        accent: "#fab387"
+                    }
+                    PowerButton {
+                        icon: "⏻"
+                        command: "systemctl poweroff"
+                        accent: "#f38ba8"
+                    }
                   
                 }
                
