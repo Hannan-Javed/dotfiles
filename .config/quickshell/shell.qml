@@ -368,7 +368,7 @@ ShellRoot {
                         rightMargin: 16
                         verticalCenter: parent.verticalCenter
                     }
-                    spacing: 12
+                    spacing: 7
                     // CPU
                     Row {
                         anchors.verticalCenter: parent.verticalCenter
