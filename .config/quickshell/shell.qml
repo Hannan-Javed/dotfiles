@@ -92,7 +92,13 @@ ShellRoot {
                         verticalCenter: parent.verticalCenter
                     }
                     spacing: 7
-                
+
+                    Mic {
+                        id: mic
+                    }
+                    Volume {
+                        id: volume
+                    }
                     SystemStats {
                         id: systemStats
                     }
