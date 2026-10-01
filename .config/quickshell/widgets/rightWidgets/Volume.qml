@@ -18,32 +18,46 @@ Rectangle {
         anchors.centerIn: parent
         spacing: Metrics.iconTextSpacing
 
-        Text {
-            id: volumeIcon
+        Item {
+            width: volumeIcon.implicitWidth
+            height: Metrics.widgetHeight
 
-            font.family: Typography.fontFamily
-            font.pixelSize: Typography.boxedIconSize
-            color: Colors.textPrimary
-            text: {
-                if (root.muted || root.volumePercent === 0)
-                    return "󰝟";
+            Text {
+                id: volumeIcon
 
-                if (root.volumePercent < 35)
-                    return "󰕿";
+                anchors.centerIn: parent
+                font.family: Typography.fontFamily
+                font.pixelSize: Typography.boxedIconSize
+                color: Colors.textPrimary
+                text: {
+                    if (root.muted || root.volumePercent === 0)
+                        return "󰝟";
 
-                if (root.volumePercent < 70)
-                    return "󰖀";
+                    if (root.volumePercent < 35)
+                        return "󰕿";
 
-                return "󰕾";
+                    if (root.volumePercent < 70)
+                        return "󰖀";
+
+                    return "󰕾";
+                }
             }
+
         }
 
-        Text {
-            id: volumeText
+        Item {
+            width: volumeText.implicitWidth
+            height: Metrics.widgetHeight
 
-            text: root.volumePercent + "%"
-            color: Colors.textPrimary
-            font.pixelSize: Typography.normal
+            Text {
+                id: volumeText
+
+                anchors.centerIn: parent
+                text: root.volumePercent + "%"
+                color: Colors.textPrimary
+                font.pixelSize: Typography.normal
+            }
+
         }
 
     }

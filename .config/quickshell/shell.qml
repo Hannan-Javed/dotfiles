@@ -115,15 +115,24 @@ ShellRoot {
                     }
 
                     PowerButton {
+                        icon: "⏾"
+                        command: "systemctl suspend"
+                        accent: Colors.peach
+                        iconYOffset: 2
+                    }
+
+                    PowerButton {
                         icon: "↻"
                         command: "systemctl reboot"
                         accent: Colors.peach
+                        iconYOffset: 0
                     }
 
                     PowerButton {
                         icon: "⏻"
                         command: "systemctl poweroff"
                         accent: Colors.red
+                        iconYOffset: 2
                     }
 
                 }

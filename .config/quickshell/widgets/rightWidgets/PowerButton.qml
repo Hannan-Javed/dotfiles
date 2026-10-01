@@ -7,6 +7,7 @@ Rectangle {
 
     required property string icon
     required property string command
+    property int iconYOffset: 0
     property color accent: Colors.red
 
     width: Metrics.widgetWidth
@@ -20,6 +21,7 @@ Rectangle {
         anchors.centerIn: parent
         text: root.icon
         color: Colors.white
+        anchors.verticalCenterOffset: iconYOffset
         font.pixelSize: Typography.boxedIconSize
     }
 

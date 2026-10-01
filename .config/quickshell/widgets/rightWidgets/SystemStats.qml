@@ -4,35 +4,45 @@ import QtQuick
 import Quickshell
 
 Row {
-    spacing: Metrics.iconTextSpacing
+    spacing: Metrics.widgetSpacing
 
-    Text {
-        text: "󰍛"
-        font.family: Typography.fontFamily
-        color: Colors.cpuIcon
-        font.pixelSize: Typography.iconSize
-    }
+    Row {
+        spacing: Metrics.iconTextSpacing
 
-    Text {
-        text: `${SystemMonitor.cpuUsage}%`
-        color: Colors.textPrimary
-        font.pixelSize: Typography.normal
-        anchors.verticalCenter: parent.verticalCenter
+        Text {
+            text: "󰍛"
+            font.family: Typography.fontFamily
+            color: Colors.cpuIcon
+            font.pixelSize: Typography.iconSize
+        }
+
+        Text {
+            text: `${SystemMonitor.cpuUsage}%`
+            color: Colors.textPrimary
+            font.pixelSize: Typography.normal
+            anchors.verticalCenter: parent.verticalCenter
+        }
+
     }
 
     // Memory
-    Text {
-        text: "󰘚"
-        font.family: Typography.fontFamily
-        color: Colors.memoryIcon
-        font.pixelSize: Typography.iconSize
-    }
+    Row {
+        spacing: Metrics.iconTextSpacing
 
-    Text {
-        text: `${SystemMonitor.memUsage}%`
-        color: Colors.textPrimary
-        font.pixelSize: Typography.normal
-        anchors.verticalCenter: parent.verticalCenter
+        Text {
+            text: "󰘚"
+            font.family: Typography.fontFamily
+            color: Colors.memoryIcon
+            font.pixelSize: Typography.iconSize
+        }
+
+        Text {
+            text: `${SystemMonitor.memUsage}%`
+            color: Colors.textPrimary
+            font.pixelSize: Typography.normal
+            anchors.verticalCenter: parent.verticalCenter
+        }
+
     }
 
 }
