@@ -1,7 +1,7 @@
+import "../../theme"
 import QtQuick
 import Quickshell
 import Quickshell.Io
-import "../../theme"
 
 Rectangle {
     id: root
@@ -12,7 +12,6 @@ Rectangle {
     width: volumeText.width + 32
     height: Metrics.widgetHeight
     radius: Metrics.widgetRadius
-
     color: Colors.rightWidgetIconBackground
 
     Row {
@@ -25,7 +24,6 @@ Rectangle {
             font.family: Typography.fontFamily
             font.pixelSize: Typography.boxedIconSize
             color: Colors.textPrimary
-
             text: {
                 if (root.muted || root.volumePercent === 0)
                     return "󰝟";
@@ -42,10 +40,12 @@ Rectangle {
 
         Text {
             id: volumeText
+
             text: root.volumePercent + "%"
             color: Colors.textPrimary
             font.pixelSize: Typography.normal
         }
+
     }
 
     Timer {
@@ -62,16 +62,14 @@ Rectangle {
 
         stdout: StdioCollector {
             onStreamFinished: {
+                root.muted = text.includes("[MUTED]");
+                let match = text.match(/Volume:\s*([0-9.]+)/);
+                if (match)
+                    root.volumePercent = Math.round(parseFloat(match[1]) * 100);
 
-                root.muted = text.includes("[MUTED]")
-
-                let match = text.match(/Volume:\s*([0-9.]+)/)
-
-                if (match) {
-                    root.volumePercent =
-                        Math.round(parseFloat(match[1]) * 100)
-                }
             }
         }
+
     }
+
 }

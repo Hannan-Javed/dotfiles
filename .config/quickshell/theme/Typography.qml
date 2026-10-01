@@ -1,10 +1,8 @@
-pragma Singleton
-
 import QtQuick
+pragma Singleton
 
 QtObject {
     readonly property string fontFamily: "JetBrains Mono"
-
     readonly property int small: 10
     readonly property int normal: 12
     readonly property int large: 14

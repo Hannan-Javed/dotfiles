@@ -1,17 +1,16 @@
+import "../../theme"
 import QtQuick
 import Quickshell
 import Quickshell.Io
-import "../../theme"
 
 Rectangle {
     id: root
 
     property bool muted: false
-    
+
     width: Metrics.widgetWidth
     height: Metrics.widgetHeight
     radius: Metrics.widgetRadius
-
     color: Colors.rightWidgetIconBackground
 
     Text {
@@ -36,8 +35,10 @@ Rectangle {
 
         stdout: StdioCollector {
             onStreamFinished: {
-                root.muted = text.includes("[MUTED]")
+                root.muted = text.includes("[MUTED]");
             }
         }
+
     }
+
 }
