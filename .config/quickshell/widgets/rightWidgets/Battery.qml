@@ -1,5 +1,6 @@
 import QtQuick
 import Quickshell.Services.UPower
+import "../../theme"
 
 Row {
 
@@ -10,6 +11,8 @@ Row {
 
     property bool batteryCharging:
         bat ? bat.state === UPowerDeviceState.Charging : false
+    
+    spacing: Metrics.iconTextSpacing
 
     function icon() {
         if (batteryCharging)
@@ -32,23 +35,17 @@ Row {
 
     Text {
         text: icon()
-        font.family: "JetBrainsMono Nerd Font"
-        font.pixelSize: 17
+        font.family: Typography.fontFamily
+        font.pixelSize: Typography.iconSize
         anchors.verticalCenter: parent.verticalCenter
 
-        color: batteryPercent <= 20 && !batteryCharging ? "#f38ba8" : "#cdd6f4"
-    }
-    
-    // to add a relatively small space between icon and percentage
-    Text {
-        text: " "
-        font.pixelSize: 10
+        color: batteryCharging ? Colors.green: batteryPercent <= 20? Colors.red : Colors.textPrimary
     }
 
     Text {
         text: Math.round(batteryPercent) + "%"
-        color: "#cdd6f4"
-        font.pixelSize: 13
+        color: Colors.textPrimary
+        font.pixelSize: Typography.normal
         anchors.verticalCenter: parent.verticalCenter
     }
 }

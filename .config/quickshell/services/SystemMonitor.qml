@@ -1,6 +1,7 @@
 import QtQuick
 import Quickshell
 import Quickshell.Io
+import "../theme"
 pragma Singleton
 
 Item {
@@ -80,7 +81,7 @@ Item {
     
     // update every 2 seconds
     Timer {
-        interval: 2000
+        interval: Metrics.systemStatsUpdateInterval
 
         running: true
         repeat: true

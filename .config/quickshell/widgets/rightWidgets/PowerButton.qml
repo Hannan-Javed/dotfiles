@@ -1,26 +1,27 @@
 import QtQuick
 import Quickshell.Io
+import "../../theme"
 
 Rectangle {
     id: root
 
     required property string icon
     required property string command
-    property color accent: "#f38ba8"
+    property color accent: Colors.red
 
-    width: 28
-    height: 28
-    radius: 8
+    width: Metrics.widgetWidth
+    height: Metrics.widgetHeight
+    radius: Metrics.widgetRadius
 
-    color: mouse.containsMouse ? accent : "#313244"
+    color: mouse.containsMouse ? accent : Colors.rightWidgetIconBackground
     border.color: accent
     border.width: 1
 
     Text {
         anchors.centerIn: parent
         text: root.icon
-        color: "white"
-        font.pixelSize: 17
+        color: Colors.white
+        font.pixelSize: Typography.boxedIconSize
     }
 
     MouseArea {

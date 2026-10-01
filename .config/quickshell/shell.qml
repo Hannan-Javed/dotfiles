@@ -3,6 +3,7 @@ import QtQuick
 import "./services"
 import "./widgets"
 import "./widgets/rightWidgets"
+import "./theme"
 
 ShellRoot {
     
@@ -24,25 +25,25 @@ ShellRoot {
                 left: 12
                 right: 12 
             }
-            implicitHeight: 44
+            implicitHeight: Metrics.barHeight
             
             // --- BAR LAYOUT UI ---
             Rectangle {
                 
                 anchors.fill: parent
-                color: "#11111b" // Deep dark background (Catppuccin Crust)
-                radius: 12        // Rounded bar look
-                
-                // Fine elegant framing border
-                border.color: "#313244"
-                border.width: 2
+                color: Colors.background
+
+                border.color: Colors.border
+                border.width: Metrics.borderWidth
+
+                radius: Metrics.barRadius
 
                 // only workspaces on left
                 Workspaces {
                     id: workspaces
                     anchors {
                         left: parent.left
-                        leftMargin: 16
+                        leftMargin: Metrics.sideMargin
                         verticalCenter: parent.verticalCenter
                     }
                 }
@@ -62,7 +63,7 @@ ShellRoot {
 
                     anchors {
                         right: rightWidgets.left
-                        rightMargin: 16
+                        rightMargin: Metrics.sideMargin
                         verticalCenter: parent.verticalCenter
                     }
                 }
@@ -77,7 +78,7 @@ ShellRoot {
 
                     Behavior on x {
                         NumberAnimation {
-                            duration: 1000
+                            duration: Metrics.clockAnimation
                             easing.type: Easing.OutQuint
                         }
                     }
@@ -88,10 +89,10 @@ ShellRoot {
                     id: rightWidgets
                     anchors {
                         right: parent.right
-                        rightMargin: 16
+                        rightMargin: Metrics.sideMargin
                         verticalCenter: parent.verticalCenter
                     }
-                    spacing: 7
+                    spacing: Metrics.widgetSpacing
 
                     Mic {
                         id: mic
@@ -108,12 +109,12 @@ ShellRoot {
                     PowerButton {
                         icon: "↻"
                         command: "systemctl reboot"
-                        accent: "#fab387"
+                        accent: Colors.peach
                     }
                     PowerButton {
                         icon: "⏻"
                         command: "systemctl poweroff"
-                        accent: "#f38ba8"
+                        accent: Colors.red
                     }
                   
                 }

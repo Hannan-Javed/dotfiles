@@ -1,11 +1,12 @@
 import Quickshell
 import QtQuick
 import "../services"
+import "../theme"
 
 Item {
 
     id: workspacesContainer
-    anchors { left: parent.left; leftMargin: 16; verticalCenter: parent.verticalCenter }
+    anchors { left: parent.left; verticalCenter: parent.verticalCenter }
     height: 8
     
     property int activeIndex: {
@@ -29,7 +30,7 @@ Item {
             height: 8
             radius: 4
             width: isCurrent ? 20 : 8
-            color: isCurrent ? "transparent" : "#45475a"
+            color: isCurrent ? "transparent" : Colors.workspaceInactive
 
             x: (index * 20) + (index > workspacesContainer.activeIndex ? 12 : 0)
 
@@ -44,7 +45,7 @@ Item {
         height: 8
         width: 20
         radius: 4
-        color: "#cba6f7" 
+        color: Colors.workspaceActive
 
         x: (workspacesContainer.activeIndex * 20)
 

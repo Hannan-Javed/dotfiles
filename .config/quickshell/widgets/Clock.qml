@@ -1,12 +1,13 @@
 import Quickshell
 import QtQuick
+import "../theme"
 
 Row {
     id: root
     property string currentDateTimeString: ""
     Timer {
         id: clockTimer
-        interval: 1000
+        interval: Metrics.clockAnimation
         running: true
         repeat: true
         triggeredOnStart: true
@@ -34,10 +35,10 @@ Row {
     Text {
         id: dynamicClock
         text: currentDateTimeString
-        color: '#ffffff'
-        font.pixelSize: 14
+        color: Colors.textPrimary
+        font.pixelSize: Typography.large
         font.bold: true
-        font.family: "monospace" // Fixed-width prevents text layout jittering
+        font.family: Typography.fontFamily // Fixed-width prevents text layout jittering
         anchors.verticalCenter: parent.verticalCenter// --- DYNAMIC ALIGNMENT CALCULATION ---// Target coordinates: Center of the bar vs Right margin offset
     }
 }

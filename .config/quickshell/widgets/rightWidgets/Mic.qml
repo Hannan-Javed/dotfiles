@@ -1,28 +1,29 @@
 import QtQuick
 import Quickshell
 import Quickshell.Io
+import "../../theme"
 
 Rectangle {
     id: root
 
     property bool muted: false
+    
+    width: Metrics.widgetWidth
+    height: Metrics.widgetHeight
+    radius: Metrics.widgetRadius
 
-    width: 28
-    height: 28
-    radius: 8
-
-    color: "#313244"
+    color: Colors.rightWidgetIconBackground
 
     Text {
         anchors.centerIn: parent
         text: muted ? "󰍭" : "󰍬"
-        color: muted ? "#f38ba8" : "#a6e3a1"
-        font.family: "JetBrainsMono Nerd Font"
-        font.pixelSize: 16
+        color: muted ? Colors.red : Colors.green
+        font.family: Typography.fontFamily
+        font.pixelSize: Typography.boxedIconSize
     }
 
     Timer {
-        interval: 1000
+        interval: Metrics.updateInterval
         running: true
         repeat: true
         onTriggered: micCheck.running = true

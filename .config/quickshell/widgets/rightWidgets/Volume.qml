@@ -1,6 +1,7 @@
 import QtQuick
 import Quickshell
 import Quickshell.Io
+import "../../theme"
 
 Rectangle {
     id: root
@@ -9,21 +10,21 @@ Rectangle {
     property bool muted: false
 
     width: volumeText.width + 32
-    height: 28
-    radius: 8
+    height: Metrics.widgetHeight
+    radius: Metrics.widgetRadius
 
-    color: "#313244"
+    color: Colors.rightWidgetIconBackground
 
     Row {
         anchors.centerIn: parent
-        spacing: 4
+        spacing: Metrics.iconTextSpacing
 
         Text {
             id: volumeIcon
 
-            font.family: "JetBrainsMono Nerd Font"
-            font.pixelSize: 16
-            color: "#cdd6f4"
+            font.family: Typography.fontFamily
+            font.pixelSize: Typography.boxedIconSize
+            color: Colors.textPrimary
 
             text: {
                 if (root.muted || root.volumePercent === 0)
@@ -42,13 +43,13 @@ Rectangle {
         Text {
             id: volumeText
             text: root.volumePercent + "%"
-            color: "#cdd6f4"
-            font.pixelSize: 12
+            color: Colors.textPrimary
+            font.pixelSize: Typography.normal
         }
     }
 
     Timer {
-        interval: 1000
+        interval: Metrics.updateInterval
         running: true
         repeat: true
         onTriggered: volumeCheck.running = true

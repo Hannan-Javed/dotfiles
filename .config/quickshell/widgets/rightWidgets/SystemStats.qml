@@ -1,46 +1,38 @@
 import Quickshell
 import QtQuick
-
 import "../../services"
+import "../../theme"
 
 Row {
-    // spacing between system stats
-    spacing: 10
+    spacing: Metrics.iconTextSpacing
     
-    // CPU
-    Row {
-        anchors.verticalCenter: parent.verticalCenter
-        Text {
-            text: "󰍛"
-            font.family: "JetBrainsMono Nerd Font"
-            color: "#89b4fa"
-            font.pixelSize: 18
-        }
-        Text {
-            text: ` ${SystemMonitor.cpuUsage}%`
-            color: "#cdd6f4"
-            font.pixelSize: 12
-
-            anchors.verticalCenter: parent.verticalCenter
-        }
+    Text {
+        text: "󰍛"
+        font.family: Typography.fontFamily
+        color: Colors.cpuIcon
+        font.pixelSize: Typography.iconSize
     }
-    // Memory
-    Row {
-        spacing: 4
+    Text {
+        text: `${SystemMonitor.cpuUsage}%`
+        color: Colors.textPrimary
+        font.pixelSize: Typography.normal
+
         anchors.verticalCenter: parent.verticalCenter
-        Text {
-            text: "󰘚"
-            font.family: "JetBrainsMono Nerd Font"
-            color: "#f9e2af"
-            font.pixelSize: 18
-        }
+    }
 
-        Text {
-            text: `${SystemMonitor.memUsage}%`
-            color: "#cdd6f4"
-            font.pixelSize: 12
+    // Memory
+    Text {
+        text: "󰘚"
+        font.family: Typography.fontFamily
+        color: Colors.memoryIcon
+        font.pixelSize: Typography.iconSize
+    }
 
-            anchors.verticalCenter: parent.verticalCenter
-        }
+    Text {
+        text: `${SystemMonitor.memUsage}%`
+        color: Colors.textPrimary
+        font.pixelSize: Typography.normal
+
+        anchors.verticalCenter: parent.verticalCenter
     }
 }
