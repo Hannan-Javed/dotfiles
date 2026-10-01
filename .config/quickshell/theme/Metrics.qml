@@ -3,11 +3,11 @@ pragma Singleton
 
 QtObject {
     // ========= SIZING =========
-    readonly property int barHeight: 44
+    readonly property int barHeight: 50
     readonly property int barRadius: 12
     readonly property int borderWidth: 2
-    readonly property int widgetWidth: 28
-    readonly property int widgetHeight: 28
+    readonly property int widgetWidth: 30
+    readonly property int widgetHeight: 30
     readonly property int widgetRadius: 8
 
     // ========= SPACING =========
