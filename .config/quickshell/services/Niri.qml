@@ -8,10 +8,16 @@ Item {
     })
     property int focusedWindowId: 0
     property string focusedWindowTitle: "" // Clear by default to show clock centered initially
+    property string focusedAppId: ""
+    property string resolvingAppId: ""
+    property string focusedIconName: ""
+    property var iconCache: ({
+    })
 
-    function updateTitle() {
+    function updateTitleAndIcon() {
         if (focusedWindowId === 0) {
             focusedWindowTitle = "";
+            focusedIconName = "";
             return ;
         }
         let win = windowsMap[focusedWindowId];
@@ -19,6 +25,12 @@ Item {
             focusedWindowTitle = "";
             return ;
         }
+        focusedAppId = win.app_id;
+        // cache hit
+        if (iconCache.hasOwnProperty(focusedAppId))
+            focusedIconName = iconCache[focusedAppId];
+        else
+            resolveIcon(focusedAppId);
         // check if app id is like org.kde.xxxx first
         let parts = win.app_id.split(".");
         if (parts.length > 1)
@@ -29,6 +41,27 @@ Item {
 
     function capitalize(str) {
         return str.charAt(0).toUpperCase() + str.slice(1);
+    }
+
+    function resolveIcon(appId) {
+        resolvingAppId = appId;
+        iconResolver.command = ["sh", "-c", `~/.config/quickshell/scripts/get-icon-name.sh "${appId}"`];
+        iconResolver.running = true;
+    }
+
+    Process {
+        id: iconResolver
+
+        stdout: SplitParser {
+            onRead: (data) => {
+                let icon = data.trim();
+                iconCache[resolvingAppId] = icon;
+                if (focusedAppId === resolvingAppId)
+                    focusedIconName = icon;
+
+            }
+        }
+
     }
 
     // for initial processing
@@ -64,7 +97,7 @@ Item {
 
                     });
                     windowsMap = newMap;
-                    updateTitle();
+                    updateTitleAndIcon();
                 } catch (e) {
                 }
             }
@@ -77,9 +110,9 @@ Item {
         command: ["niri", "msg", "--json", "event-stream"]
         running: true
         onRunningChanged: {
-            if (!running) {
+            if (!running)
                 running = true;
-            }
+
         }
 
         stdout: SplitParser {
@@ -102,7 +135,7 @@ Item {
 
                         });
                         windowsMap = newMap;
-                        updateTitle();
+                        updateTitleAndIcon();
                     }
                     if (obj.WindowFocusChanged) {
                         let nextId = obj.WindowFocusChanged.id;
@@ -111,7 +144,7 @@ Item {
                             focusedWindowTitle = "";
                         } else {
                             focusedWindowId = nextId;
-                            updateTitle();
+                            updateTitleAndIcon();
                         }
                     }
                     if (obj.WindowOpenedOrChanged) {
@@ -121,7 +154,7 @@ Item {
                         windowsMap = currentMap;
                         if (w.is_focused) {
                             focusedWindowId = w.id;
-                            updateTitle();
+                            updateTitleAndIcon();
                         }
                     }
                     if (obj.WorkspaceActivated && obj.WorkspaceActivated.focused) {
