@@ -1,6 +1,5 @@
 import "../theme"
 import QtQuick
-import Quickshell
 import Quickshell.Io
 pragma Singleton
 
@@ -27,7 +26,7 @@ Item {
                 for (let i = 1; i < parts.length; i++) {
                     total += parseFloat(parts[i]);
                 }
-                if (cpuInitialized) {
+                if (!cpuInitialized) {
                     lastIdle = idle;
                     lastTotal = total;
                     cpuInitialized = true;
