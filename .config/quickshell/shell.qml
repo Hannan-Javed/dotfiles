@@ -98,6 +98,10 @@ ShellRoot {
                         verticalCenter: parent.verticalCenter
                     }
 
+                    Wifi {
+                        id: wifi
+                    }
+
                     Mic {
                         id: mic
                     }

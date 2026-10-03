@@ -22,5 +22,6 @@ QtObject {
     
     // ========= INTERVALS =========
     readonly property int updateInterval: 1000
+    readonly property int longUpdateInterval: 5000
     readonly property int systemStatsUpdateInterval: 2000
 }
