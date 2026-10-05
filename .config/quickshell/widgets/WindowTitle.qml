@@ -11,11 +11,12 @@ Row {
 
     Row {
         opacity: Niri.focusedWindowTitle !== "" ? 1 : 0
+        anchors.verticalCenter: parent.verticalCenter
 
         IconImage {
             source: Quickshell.iconPath(Niri.focusedIconName || "fallback")
-            implicitWidth: Typography.boxedIconSize
-            implicitHeight: Typography.boxedIconSize
+            implicitWidth: Typography.windowIconSize
+            implicitHeight: Typography.windowIconSize
         }
 
         Behavior on opacity {
@@ -30,6 +31,7 @@ Row {
     Text {
         id: windowTitleText
 
+        anchors.verticalCenter: parent.verticalCenter
         text: Niri.focusedWindowTitle
         color: Colors.textPrimary
         font.pixelSize: Typography.large
