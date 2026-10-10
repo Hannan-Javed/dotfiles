@@ -75,8 +75,8 @@ Rectangle {
 
             Text {
                 visible: modelData.body !== ""
-                text: Colors.textSecondary
-                color: "#bac2de"
+                text: modelData.body
+                color: Colors.textSecondary
                 font.pixelSize: 12
                 wrapMode: Text.WordWrap
                 width: parent.width
