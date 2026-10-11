@@ -98,16 +98,15 @@ Rectangle {
 
         Rectangle {
             width: parent.width
-            height: Metrics.notificationImageHeight
-            radius: 12
-            clip: true
-            visible: previewImage !== ""
+            height: Math.min(width * preview.sourceSize.height / Math.max(preview.sourceSize.width, 1), 250)
+            color: Colors.background
 
             Image {
+                id: preview
                 anchors.fill: parent
                 source: previewImage
-                fillMode: Image.PreserveAspectCrop
-                asynchronous: true
+                fillMode: Image.PreserveAspectFit
+                smooth: true
             }
 
         }
