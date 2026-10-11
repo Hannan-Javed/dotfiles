@@ -33,7 +33,9 @@ PanelWindow {
         keepOnReload: true
         onNotification: (notification) => {
             notification.tracked = true;
-            notification.expireAt = Date.now() + Metrics.notificationInterval;
+            if (!notification.resident)
+                notification.expireAt = Date.now() + Metrics.notificationInterval;
+
             notification.animatedIn = false;
             NotificationHistory.add(notification);
         }
