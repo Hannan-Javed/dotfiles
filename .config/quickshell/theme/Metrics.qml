@@ -10,6 +10,8 @@ QtObject {
     readonly property int widgetHeight: 30
     readonly property int widgetRadius: 8
     readonly property int notificationWidth: 450
+    readonly property int notificationAppIconSize: 25
+    readonly property int notificationImageHeight: 160
 
     // ========= SPACING =========
     readonly property int widgetSpacing: 7

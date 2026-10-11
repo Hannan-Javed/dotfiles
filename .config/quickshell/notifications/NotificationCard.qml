@@ -5,8 +5,14 @@ import Quickshell
 Rectangle {
     id: root
 
+    readonly property bool appIconIsImage: isImageSource(modelData.appIcon)
     required property var modelData
     readonly property int hiddenX: width + 50
+    readonly property string previewImage: modelData.image !== "" ? modelData.image : (appIconIsImage ? modelData.appIcon : "")
+
+    function isImageSource(icon) {
+        return icon && icon !== "" && (icon.startsWith("/") || icon.startsWith("file://") || icon.startsWith("image://"));
+    }
 
     function closeNotification() {
         slide.x = root.hiddenX;
@@ -14,7 +20,7 @@ Rectangle {
     }
 
     width: Metrics.notificationWidth
-    implicitHeight: content.implicitHeight + 24
+    implicitHeight: content.implicitHeight + 20
     radius: 16
     color: Colors.background
     border.width: Metrics.borderWidth
@@ -28,58 +34,78 @@ Rectangle {
         }
     }
 
-    Row {
+    Column {
+        // Header
+        // Title
+        // Body
+        // Notification image
+
         id: content
 
         anchors.fill: parent
         anchors.margins: 12
-        spacing: 12
+        spacing: 6
 
-        Rectangle {
-            width: 42
-            height: 42
-            radius: 10
-            color: Colors.border
-            visible: modelData.appIcon !== ""
+        Row {
+            spacing: 4
 
-            Image {
-                anchors.centerIn: parent
-                width: 24
-                height: 24
-                source: modelData.appIcon
-                fillMode: Image.PreserveAspectFit
-                visible: source !== ""
+            Rectangle {
+                width: Metrics.notificationAppIconSize
+                height: Metrics.notificationAppIconSize
+                radius: 6
+                color: Colors.background
+                visible: modelData.appIcon !== "" && !appIconIsImage
+
+                Image {
+                    anchors.fill: parent
+                    anchors.margins: 2
+                    source: Quickshell.iconPath(modelData.appIcon, true)
+                    fillMode: Image.PreserveAspectFit
+                }
+
+            }
+
+            Text {
+                text: modelData.appName || "Notification"
+                color: Colors.textSecondary
+                font.pixelSize: 14
+                anchors.verticalCenter: parent.verticalCenter
+                font.bold: true
             }
 
         }
 
-        Column {
-            width: parent.width - 70
-            spacing: 3
+        Text {
+            text: modelData.summary
+            width: parent.width
+            color: Colors.textPrimary
+            font.pixelSize: 15
+            font.bold: true
+            wrapMode: Text.WordWrap
+            visible: text !== ""
+        }
 
-            Text {
-                text: modelData.appName || "Notification"
-                color: Colors.textPrimary
-                font.pixelSize: 11
-                font.bold: true
-            }
+        Text {
+            text: modelData.body
+            width: parent.width
+            color: Colors.textSecondary
+            font.pixelSize: 13
+            wrapMode: Text.WordWrap
+            visible: text !== ""
+        }
 
-            Text {
-                text: modelData.summary
-                color: Colors.textPrimary
-                font.pixelSize: 14
-                font.bold: true
-                wrapMode: Text.WordWrap
-                width: parent.width
-            }
+        Rectangle {
+            width: parent.width
+            height: Metrics.notificationImageHeight
+            radius: 12
+            clip: true
+            visible: previewImage !== ""
 
-            Text {
-                visible: modelData.body !== ""
-                text: modelData.body
-                color: Colors.textSecondary
-                font.pixelSize: 12
-                wrapMode: Text.WordWrap
-                width: parent.width
+            Image {
+                anchors.fill: parent
+                source: previewImage
+                fillMode: Image.PreserveAspectCrop
+                asynchronous: true
             }
 
         }
