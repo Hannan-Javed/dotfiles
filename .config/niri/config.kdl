@@ -126,6 +126,9 @@ output "DP-4" {
     // transform "normal"
     // position x=2560 y=0
 }
+debug {
+    honor-xdg-activation-with-invalid-serial
+}
 
 // Settings that influence how windows are positioned and sized.
 // Find more information on the wiki:

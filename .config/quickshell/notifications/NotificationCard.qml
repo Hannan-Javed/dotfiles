@@ -117,6 +117,12 @@ Rectangle {
     MouseArea {
         anchors.fill: parent
         onClicked: {
+            let action = modelData.actions.find((a) => {
+                return a.identifier === "default";
+            });
+            if (action)
+                action.invoke();
+
             closeNotification();
         }
     }
