@@ -42,6 +42,7 @@ PanelWindow {
     Column {
         id: notificationsColumn
 
+        // vertical spacing between multiple notifications
         spacing: 10
 
         Repeater {

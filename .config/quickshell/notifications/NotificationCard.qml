@@ -44,9 +44,11 @@ Rectangle {
 
         anchors.fill: parent
         anchors.margins: 12
+        // vertical spacing within the notification
         spacing: 6
 
         Row {
+            // horizontal spacing between appIcon and the app
             spacing: 4
 
             Rectangle {
