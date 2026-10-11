@@ -24,6 +24,12 @@ PanelWindow {
     NotificationServer {
         id: server
 
+        // Crucial for Firefox, Chrome etc
+        actionsSupported: true
+        bodyImagesSupported: true
+        actionIconsSupported: true
+        persistenceSupported: true
+
         keepOnReload: true
         onNotification: (notification) => {
             notification.tracked = true;
