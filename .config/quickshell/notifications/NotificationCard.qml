@@ -83,7 +83,9 @@ Rectangle {
             color: Colors.textPrimary
             font.pixelSize: 15
             font.bold: true
-            wrapMode: Text.WordWrap
+            wrapMode: Text.NoWrap
+            elide: Text.ElideRight
+            maximumLineCount: 1
             visible: text !== ""
         }
 
@@ -92,7 +94,9 @@ Rectangle {
             width: parent.width
             color: Colors.textSecondary
             font.pixelSize: 13
-            wrapMode: Text.WordWrap
+            wrapMode: Text.NoWrap
+            elide: Text.ElideRight
+            maximumLineCount: 10
             visible: text !== ""
         }
 
@@ -103,6 +107,7 @@ Rectangle {
 
             Image {
                 id: preview
+
                 anchors.fill: parent
                 source: previewImage
                 fillMode: Image.PreserveAspectFit
