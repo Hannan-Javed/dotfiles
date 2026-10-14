@@ -683,7 +683,6 @@ binds {
     Mod+A hotkey-overlay-title="Open pCloud" { spawn-sh "wayscriber -d & wayscriber --daemon-toggle"; }
     Mod+C hotkey-overlay-title="Launch/Close Wayscriber" { spawn-sh "setsid gio launch ~/.config/autostart/pcloud.desktop"; }
     Mod+V hotkey-overlay-title="Open Shotcut" { spawn "~/Downloads/Shotcut.app/shotcut"; }
-    Mod+D hotkey-overlay-title="Open Discord" { spawn "discord"; }
 
     // monitor enabling/disabling
 
