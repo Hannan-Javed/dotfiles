@@ -1,4 +1,4 @@
-import "../services"
+import "../services/system"
 import "../theme"
 import QtQuick
 import Quickshell

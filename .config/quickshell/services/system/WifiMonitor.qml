@@ -1,4 +1,4 @@
-import "../theme"
+import "../../theme"
 import QtQuick
 import Quickshell.Io
 pragma Singleton

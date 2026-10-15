@@ -1,0 +1,3 @@
+singleton Niri 1.0 system/Niri.qml
+singleton SystemMonitor 1.0 system/SystemMonitor.qml
+singleton WifiMonitor 1.0 system/WifiMonitor.qml
