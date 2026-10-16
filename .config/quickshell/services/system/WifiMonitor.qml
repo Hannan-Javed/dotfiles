@@ -12,7 +12,7 @@ Item {
     Process {
         id: wifiProc
 
-        command: ["/home/hannan/.config/quickshell/scripts/wifi-info.sh"]
+        command: ["sh","-c", "~/.config/quickshell/scripts/wifi-info.sh"]
 
         stdout: SplitParser {
             onRead: (data) => {
