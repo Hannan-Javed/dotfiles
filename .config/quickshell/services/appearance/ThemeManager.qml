@@ -2,22 +2,28 @@ import "../../services"
 import QtQuick
 pragma Singleton
 
-// Theme is the owner of colors. On update theme, asks other owners to change as well (if theme asks so)
+// Runtime owner of colors
 QtObject {
     id: root
 
-    property color background: "#11111b"
-    property color border: "#cba6f7"
-    property color textPrimary: "#cdd6f4"
+    property color background
+    property color border
+    property color textPrimary
+    // pull activeTheme from Customization Manager, but also force ThemeRegistry to be loaded before applying that theme
+    // since applying a theme before its metadata is loaded will cause issue
+    property string currentThemeId: CustomizationManager.activeTheme
+    property var registryIndex: ThemeRegistry.themeIndex
 
-    function applyTheme(themeId) {
-        if (!themeId)
+    function updateTheme() {
+        // Exit early if either piece of data isn't ready yet
+        if (!currentThemeId || !registryIndex || Object.keys(registryIndex).length === 0)
             return ;
 
-        const theme = ThemeRegistry.getTheme(themeId);
-        if (!theme)
+        const theme = registryIndex[currentThemeId];
+        if (!theme) {
+            console.warn("Theme not found in registry yet:", currentThemeId);
             return ;
-
+        }
         // Loop through all incoming color keys dynamically
         if (theme.colors) {
             for (const key in theme.colors) {
@@ -30,22 +36,14 @@ QtObject {
         }
         // iterate through whatever suggestions are provided
         if (theme.suggestions) {
-            const managerMap = {
-                "bar": BarManager,
-                "greetd": GreetdManager,
-                "kitty": KittyManager,
-                "notification": NotificationManager,
-                "wallpaper": WallpaperManager
-            };
             for (const key in theme.suggestions) {
-                const manager = managerMap[key];
                 const value = theme.suggestions[key];
-                if (manager && typeof manager.update === "function")
-                    manager.update(value);
-                else
-                    console.warn("No manager found or missing applySuggestion function for key:", key);
+                CustomizationManager.setSetting(key, value);
             }
         }
     }
 
+    // 2. Watch for changes in either the active theme ID OR the loaded index
+    onCurrentThemeIdChanged: updateTheme()
+    onRegistryIndexChanged: updateTheme()
 }

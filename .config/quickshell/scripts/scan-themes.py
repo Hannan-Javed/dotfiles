@@ -34,8 +34,13 @@ for group_dir in ROOT.iterdir():
                 "suggestions": metadata["suggestions"],
                 "group": group_name,
                 "path": str(theme_dir),
-                "wallpaper": str(theme_dir / "wallpaper.png"),
             }
+
+            for ext in ["png", "jpg", "jpeg"]:
+                wallpaper_path = theme_dir / f"wallpaper.{ext}"
+                if wallpaper_path.exists():
+                    theme["suggestions"]["wallpaper"] = str(wallpaper_path)
+                    break  # Found it, stop looking
 
             themes[group_name].append(theme)
             index[theme["id"]] = theme
