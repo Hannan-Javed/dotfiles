@@ -7,7 +7,6 @@ singleton ThemeRegistry 1.0 appearance/ThemeRegistry.qml
 singleton CustomizationManager 1.0 appearance/CustomizationManager.qml
 singleton UIManager 1.0 appearance/UIManager.qml
 
-singleton BarManager 1.0 appearance/managers/BarManager.qml
 singleton NotificationManager 1.0 appearance/managers/NotificationManager.qml
 singleton WallpaperManager 1.0 appearance/managers/WallpaperManager.qml
 singleton KittyManager 1.0 appearance/managers/KittyManager.qml
