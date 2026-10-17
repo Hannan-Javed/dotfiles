@@ -301,10 +301,8 @@ environment {
 }
 
 spawn-at-startup "qs"
-spawn-sh-at-startup "awww-daemon & awww img ~/Wallpapers/berserk38.jpg --resize crop"
-spawn-sh-at-startup "swaybg -m fill -i ~/Wallpapers/berserk38-blur.jpg"
 spawn-sh-at-startup "sleep 1 & wayscriber -d"
-
+spawn-sh-at-startup "awww-daemon"
 
 // To run a shell command (with variables, pipes, etc.), use spawn-sh-at-startup:
 // spawn-sh-at-startup "qs -c ~/source/qs/MyAwesomeShell"
