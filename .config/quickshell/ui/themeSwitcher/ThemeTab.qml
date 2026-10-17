@@ -33,7 +33,7 @@ ScrollView {
                         width: 200
                         text: modelData.name
                         onClicked: {
-                            ThemeManager.applyTheme(modelData.id);
+                            CustomizationManager.setSetting("activeTheme", modelData.id);
                         }
                     }
 

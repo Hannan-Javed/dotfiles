@@ -1,11 +1,10 @@
-// BarTab.qml
 import "../../services"
 import QtQuick
 import QtQuick.Controls
 
 ScrollView {
-
     anchors.margins: 20
+
     Column {
         spacing: 20
 
@@ -15,13 +14,16 @@ ScrollView {
 
             delegate: Button {
                 required property var modelData
+
                 width: 250
                 text: modelData.name
-
                 onClicked: {
-                    BarManager.update(modelData.name)
+                    CustomizationManager.setSetting("barStyle", modelData.name);
                 }
             }
+
         }
+
     }
+
 }
