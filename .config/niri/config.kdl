@@ -360,7 +360,10 @@ window-rule {
     match app-id=r#"firefox$"# title="^Picture-in-Picture$"
     open-floating true
 }
-
+window-rule {
+    match app-id="^org.quickshell$"
+    open-floating true
+}
 window-rule {
     // This app-id regular expression will work for both:
     // - host Firefox (app-id is "firefox")
@@ -681,6 +684,9 @@ binds {
     Mod+A hotkey-overlay-title="Open pCloud" { spawn-sh "wayscriber -d & wayscriber --daemon-toggle"; }
     Mod+C hotkey-overlay-title="Launch/Close Wayscriber" { spawn-sh "setsid gio launch ~/.config/autostart/pcloud.desktop"; }
     Mod+V hotkey-overlay-title="Open Shotcut" { spawn "~/Downloads/Shotcut.app/shotcut"; }
+    Mod+T hotkey-overlay-title="Open Theme Switcher" { 
+        spawn-sh "qs ipc call appearance toggleAppearanceCenter"
+    }
 
     // monitor enabling/disabling
 
