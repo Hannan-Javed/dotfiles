@@ -9,7 +9,6 @@ Item {
     property string currentWallpaper: CustomizationManager.wallpaper
 
     onCurrentWallpaperChanged: {
-        console.log("ran");
         if (!currentWallpaper)
             return ;
 
