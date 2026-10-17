@@ -16,6 +16,11 @@ ShellRoot {
         function hideAppearanceCenter(): void { UIManager.hideAppearanceCenter() }
     }
 
+    // to awake background service singletons on startup, wrap it in onCompleted
+    Component.onCompleted: {
+        const awakeWallpaper = WallpaperManager;
+    }
+
     Bar {
     }
 
