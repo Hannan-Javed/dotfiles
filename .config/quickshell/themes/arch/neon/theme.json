@@ -1,0 +1,15 @@
+{
+  "name": "neon",
+  "author": "Hannan",
+  "version": "1.0",
+
+  "colors": {
+    "background": "#11111b",
+
+    "border": "#cba6f7"
+  },
+
+  "suggestions": {
+    "barStyle": "SimpleBar"
+  }
+}
