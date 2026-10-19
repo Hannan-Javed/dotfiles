@@ -2,6 +2,7 @@ import "../../services"
 import QtQuick
 import QtQuick.Controls
 import QtQuick.Layouts
+
 Rectangle {
     color: ThemeManager.background
     implicitWidth: 800
@@ -25,6 +26,10 @@ Rectangle {
             text: "Bars"
         }
 
+        TabButton {
+            text: "Notifications"
+        }
+
     }
 
     StackLayout {
@@ -40,7 +45,8 @@ Rectangle {
         BarTab {
         }
 
-    }
+        NotificationTab {
+        }
 
-  
+    }
 }
