@@ -17,7 +17,7 @@ ScrollView {
                 width: 250
                 text: modelData.name
                 onClicked: {
-                    CustomizationManager.setSetting("barStyle", modelData.name);
+                    UserPreferences.setSetting("barStyle", modelData.name);
                 }
             }
 
