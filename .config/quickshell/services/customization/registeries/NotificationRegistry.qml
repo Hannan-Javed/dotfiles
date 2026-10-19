@@ -3,7 +3,7 @@ import Quickshell
 import Quickshell.Io
 pragma Singleton
 
-// Scanner of notifications in notifications/styles directory
+// scanner of notifications in notifications/styles directory
 Item {
     id: root
 

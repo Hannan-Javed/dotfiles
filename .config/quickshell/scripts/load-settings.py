@@ -3,7 +3,7 @@
 import json
 from pathlib import Path
 
-path = Path.home() / ".config/quickshell/state.json"
+path = Path.home() / ".config/quickshell/user-preferences.json"
 
 if path.exists():
     print(path.read_text())

@@ -2,17 +2,16 @@ singleton Niri 1.0 system/Niri.qml
 singleton SystemMonitor 1.0 system/SystemMonitor.qml
 singleton WifiMonitor 1.0 system/WifiMonitor.qml
 
-singleton ThemeManager 1.0 appearance/ThemeManager.qml
-singleton ThemeRegistry 1.0 appearance/ThemeRegistry.qml
-singleton CustomizationManager 1.0 appearance/CustomizationManager.qml
-singleton UIManager 1.0 appearance/UIManager.qml
+singleton PaletteManager 1.0 customization/PaletteManager.qml
+singleton UserPreferences 1.0 customization/UserPreferences.qml
+singleton UIManager 1.0 customization/UIManager.qml
 
-singleton WallpaperManager 1.0 appearance/managers/WallpaperManager.qml
-singleton KittyManager 1.0 appearance/managers/KittyManager.qml
-singleton GreetdManager 1.0 appearance/managers/GreetdManager.qml
+singleton WallpaperManager 1.0 customization/managers/WallpaperManager.qml
+# singleton KittyManager 1.0 customization/managers/KittyManager.qml
+# singleton GreetdManager 1.0 customization/managers/GreetdManager.qml
 
-
-singleton BarRegistry 1.0 appearance/registeries/BarRegistry.qml
-singleton NotificationRegistry 1.0 appearance/registeries/NotificationRegistry.qml
-# singleton KittyRegistry 1.0 appearance/registeries/KittyRegistry.qml
-# singleton GreetdRegistry 1.0 appearance/registeries/GreetdRegistry.qml
+singleton ThemeRegistry 1.0 customization/registeries/ThemeRegistry.qml
+singleton BarRegistry 1.0 customization/registeries/BarRegistry.qml
+singleton NotificationRegistry 1.0 customization/registeries/NotificationRegistry.qml
+# singleton KittyRegistry 1.0 customization/registeries/KittyRegistry.qml
+# singleton GreetdRegistry 1.0 customization/registeries/GreetdRegistry.qml

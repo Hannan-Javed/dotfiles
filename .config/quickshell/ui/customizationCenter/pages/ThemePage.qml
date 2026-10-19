@@ -1,4 +1,4 @@
-import "../../services"
+import "../../../services"
 import QtQuick
 import QtQuick.Controls
 
@@ -33,7 +33,7 @@ ScrollView {
                         width: 200
                         text: modelData.name
                         onClicked: {
-                            CustomizationManager.setSetting("activeTheme", modelData.id);
+                            UserPreferences.setSetting("activeTheme", modelData.id);
                         }
                     }
 

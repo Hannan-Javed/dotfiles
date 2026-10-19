@@ -30,7 +30,7 @@
 
 !.config/quickshell/
 !.config/quickshell/**
-.config/quickshell/state.json
+.config/quickshell/user-preferences.json
 
 !.config/waybar/
 !.config/waybar/**

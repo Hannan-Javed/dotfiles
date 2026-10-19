@@ -6,6 +6,6 @@ Loader {
     id: notificationLoader
 
     anchors.fill: parent
-    source: Qt.resolvedUrl(`styles/${CustomizationManager.notificationStyle}.qml`)
-    active: CustomizationManager.notificationStyle !== "" // only force load when there is an actual value
+    source: Qt.resolvedUrl(`styles/${UserPreferences.notificationStyle}.qml`)
+    active: UserPreferences.notificationStyle !== "" // only force load when there is an actual value
 }

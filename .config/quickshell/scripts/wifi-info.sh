@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/usr/bin/env bash
 
 IF=$(nmcli -t -f DEVICE,TYPE device | awk -F: '$2=="wifi"{print $1; exit}')
 

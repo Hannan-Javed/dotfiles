@@ -4,9 +4,9 @@ import Quickshell
 import Quickshell.Io
 pragma Singleton
 
-// Runtime owner of wallpaper
+// runtime owner of wallpaper
 Item {
-    property string currentWallpaper: CustomizationManager.wallpaper
+    property string currentWallpaper: UserPreferences.wallpaper
 
     onCurrentWallpaperChanged: {
         if (!currentWallpaper)

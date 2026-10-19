@@ -1,7 +1,7 @@
 import "./bar"
 import "./notifications"
 import "./services"
-import "./ui/themeSwitcher"
+import "./ui/customizationCenter"
 import QtQuick
 import Quickshell
 import Quickshell.Io
@@ -44,7 +44,7 @@ ShellRoot {
 
             }
 
-            ThemeSwitcher {
+            CustomizationCenter {
                 id: switcherContent
                 anchors.fill: parent
             }

@@ -3,6 +3,7 @@ import Quickshell
 import Quickshell.Io
 pragma Singleton
 
+// scanner of bars in bars/styles directory
 Item {
     id: root
 
@@ -37,7 +38,7 @@ Item {
                 try {
                     root.bars = JSON.parse(text.trim());
                 } catch (e) {
-                    console.error("Failed parsing theme registry:", e);
+                    console.error("Failed parsing Bar registry:", e);
                 }
             }
         }

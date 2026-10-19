@@ -1,10 +1,11 @@
 import "../../services"
+import "./pages"
 import QtQuick
 import QtQuick.Controls
 import QtQuick.Layouts
 
 Rectangle {
-    color: ThemeManager.background
+    color: PaletteManager.background
     implicitWidth: 800
     implicitHeight: 600
 
@@ -39,14 +40,15 @@ Rectangle {
         anchors.bottom: parent.bottom
         currentIndex: tabBar.currentIndex
 
-        ThemeTab {
+        ThemePage {
         }
 
-        BarTab {
+        BarPage {
         }
 
-        NotificationTab {
+        NotificationPage {
         }
 
     }
+
 }

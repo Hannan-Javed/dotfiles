@@ -3,6 +3,7 @@ import Quickshell
 import Quickshell.Io
 pragma Singleton
 
+// scanner of themes in quickshell/themes/ directory
 Item {
     id: root
 
@@ -32,7 +33,7 @@ Item {
     Process {
         id: scanner
 
-        command: ["python3",  Quickshell.env("HOME") + "/.config/quickshell/scripts/scan-themes.py"]
+        command: ["python3", Quickshell.env("HOME") + "/.config/quickshell/scripts/scan-themes.py"]
 
         stdout: StdioCollector {
             onStreamFinished: {

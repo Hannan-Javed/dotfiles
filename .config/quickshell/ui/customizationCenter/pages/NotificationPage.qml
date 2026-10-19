@@ -1,4 +1,4 @@
-import "../../services"
+import "../../../services"
 import QtQuick
 import QtQuick.Controls
 
@@ -9,8 +9,7 @@ ScrollView {
         spacing: 20
 
         Repeater {
-            // Using the raw property list directly is safer for Repeaters than a function return
-            model: BarRegistry.bars
+            model: NotificationRegistry.notifications
 
             delegate: Button {
                 required property var modelData
@@ -18,7 +17,7 @@ ScrollView {
                 width: 250
                 text: modelData.name
                 onClicked: {
-                    CustomizationManager.setSetting("barStyle", modelData.name);
+                    CustomizationManager.setSetting("notificationStyle", modelData.name);
                 }
             }
 

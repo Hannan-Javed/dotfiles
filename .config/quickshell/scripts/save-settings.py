@@ -13,7 +13,7 @@ settings = {
     "greetd": sys.argv[6]
 }
 
-path = Path.home() / ".config/quickshell/state.json"
+path = Path.home() / ".config/quickshell/user-preferences.json"
 
 path.write_text(
     json.dumps(settings, indent=4)

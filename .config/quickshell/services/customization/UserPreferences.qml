@@ -13,14 +13,14 @@ Item {
     property string barStyle
     property string notificationStyle
     property string wallpaper
-    property string kittyTheme
-    property string greetdTheme
+    property string kittyStyle
+    property string greetdStyle
 
     function restore() {
         load();
     }
 
-    // Central Setter Function To Update State
+    // central setter function to update state
     function setSetting(key, value) {
         if (!key)
             return ;
@@ -34,7 +34,7 @@ Item {
     }
 
     function save() {
-        saveProcess.command = ["python3", Quickshell.env("HOME") + "/.config/quickshell/scripts/save-settings.py", activeTheme, barStyle, notificationStyle, wallpaper, kittyTheme, greetdTheme];
+        saveProcess.command = ["python3", Quickshell.env("HOME") + "/.config/quickshell/scripts/save-settings.py", activeTheme, barStyle, notificationStyle, wallpaper, kittyStyle, greetdStyle];
         saveProcess.running = true;
     }
 
@@ -64,8 +64,8 @@ Item {
                     root.barStyle = data.bar || "SimpleBar";
                     root.notificationStyle = data.notification || "SimpleNotification";
                     root.wallpaper = data.wallpaper || "~/.config/quickshell/themes/arch/neon/wallpaper.jpg";
-                    root.kittyTheme = data.kitty || "DefaultKitty";
-                    root.greetdTheme = data.greetd || "DefaultGreetd";
+                    root.kittyStyle = data.kitty || "DefaultKitty";
+                    root.greetdStyle = data.greetd || "DefaultGreetd";
                 } catch (e) {
                     console.error("Failed loading settings:", e);
                 }
