@@ -32,11 +32,14 @@ ShellRoot {
 
         active: UIManager.appearanceCenterVisible
 
-        component: FloatingWindow {
+        component: Window {
             id: appearanceCenterWindow
+            color: "transparent"
+            flags: Qt.Window | Qt.FramelessWindowHint
+              // Provide a hardcoded or calculated fallback sizing if implicit values are 0
+            width: switcherContent.implicitWidth
+            height: switcherContent.implicitHeight
 
-            implicitWidth: switcherContent.implicitWidth
-            implicitHeight: switcherContent.implicitHeight
             visible: true
             onVisibleChanged: {
                 if (!visible)
@@ -46,6 +49,7 @@ ShellRoot {
 
             CustomizationCenter {
                 id: switcherContent
+
                 anchors.fill: parent
             }
 
