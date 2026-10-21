@@ -363,6 +363,9 @@ window-rule {
 window-rule {
     match app-id="^org.quickshell$"
     open-floating true
+    focus-ring {
+        off
+    }
 }
 window-rule {
     // This app-id regular expression will work for both:
