@@ -1,5 +1,5 @@
-import "../../theme"
 import "../../notifications"
+import "../../theme"
 import QtQuick
 import Quickshell
 import Quickshell.Services.Notifications
@@ -50,13 +50,34 @@ PanelWindow {
         Repeater {
             model: server.trackedNotifications.values
 
-            delegate: Rectangle { //  notification card starts from here
+            //  notification card starts from here
+            delegate: Rectangle {
                 id: root
 
-                readonly property bool appIconIsImage: isImageSource(modelData.appIcon)
                 required property var modelData
                 readonly property int hiddenX: width + 50
-                readonly property string previewImage: modelData.image !== "" ? modelData.image : (appIconIsImage ? modelData.appIcon : "")
+                readonly property string previewImage: {
+                    // make previewImage use appicon instead
+                    if (modelData.appName === "niri" && modelData.appIcon !== "" && modelData.image === "")
+                        return modelData.appIcon;
+
+                    // make appIcon use previewImage instead
+                    if ((modelData.appName === "NetworkManager Applet" || modelData.appName === "pcloud") && modelData.appIcon === "" && modelData.image !== "")
+                        return "";
+
+                    return modelData.image;
+                }
+                readonly property string finalAppIcon: {
+                    // make previewImage use appicon instead
+                    if (modelData.appName === "niri" && modelData.appIcon !== "" && modelData.image === "")
+                        return "";
+
+                    // make appIcon use previewImage instead
+                    if ((modelData.appName === "NetworkManager Applet" || modelData.appName === "pcloud") && modelData.appIcon === "" && modelData.image !== "")
+                        return modelData.image;
+
+                    return modelData.appIcon;
+                }
 
                 function isImageSource(icon) {
                     return icon && icon !== "" && (icon.startsWith("/") || icon.startsWith("file://") || icon.startsWith("image://"));
@@ -104,12 +125,12 @@ PanelWindow {
                             height: Metrics.notificationAppIconSize
                             radius: 6
                             color: Colors.background
-                            visible: modelData.appIcon !== "" && !appIconIsImage
+                            visible: finalAppIcon !== ""
 
                             Image {
                                 anchors.fill: parent
                                 anchors.margins: 2
-                                source: Quickshell.iconPath(modelData.appIcon, true)
+                                source: isImageSource(finalAppIcon) ? finalAppIcon : Quickshell.iconPath(finalAppIcon, "fallback")
                                 fillMode: Image.PreserveAspectFit
                             }
 
@@ -152,6 +173,7 @@ PanelWindow {
                         width: parent.width
                         height: Math.min(width * preview.sourceSize.height / Math.max(preview.sourceSize.width, 1), 250)
                         color: Colors.background
+                        visible: previewImage !== ""
 
                         Image {
                             id: preview
