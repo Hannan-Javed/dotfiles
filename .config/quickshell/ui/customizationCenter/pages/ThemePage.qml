@@ -115,11 +115,13 @@ Item {
 
     onActiveFocusChanged: {
         if (activeFocus) {
+            // if came into selection and there was another selection from firstRow, go to that
             if (lastSelectedThemeIndex !== -1)
                 selectedThemeIndex = lastSelectedThemeIndex;
             else
                 selectedThemeIndex = 0;
         } else {
+            // store the last selected index
             lastSelectedThemeIndex = selectedThemeIndex;
             selectedThemeIndex = -1;
         }

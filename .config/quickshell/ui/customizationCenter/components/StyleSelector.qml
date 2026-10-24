@@ -9,8 +9,9 @@ Item {
     required property var items
     property int selectedIndex: -1
     property real previewRatio: 0.35 // default preview rato
-    property string previewSource: currentItem && currentItem.preview ? currentItem.preview : ""
-    property string previewTitle: currentItem ? currentItem.name : ""
+    property var appliedStyle
+    property string previewSource: selectedIndex !== -1 ? currentItem && currentItem.preview ? currentItem.preview : "" : appliedStyle.preview
+    property string previewTitle: currentItem ? currentItem.name : appliedStyle.name
     readonly property var currentItem: items && items.length > 0 ? items[selectedIndex] : null
     property var itemDelegates: ({
     })
@@ -18,6 +19,7 @@ Item {
     signal activated(var item)
 
     function ensureSelectedVisible() {
+        console.lg;
         let item = itemDelegates[selectedIndex];
         if (!item)
             return ;
