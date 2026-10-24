@@ -12,9 +12,16 @@ styles = []
 
 if root.exists():
     for file in root.glob("*.qml"):
-        styles.append({
+        style = {
             "name": file.stem,
             "path": str(file)
-        })
+        }
+        for ext in ["png", "jpg", "jpeg"]:
+            preview_path = file.with_suffix(f".{ext}")
+            if preview_path.exists():
+                style["preview"] = str(preview_path)
+                break
+
+        styles.append(style)
 
 print(json.dumps(styles))
