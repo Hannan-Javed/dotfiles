@@ -11,6 +11,9 @@ QtObject {
     readonly property int widgetRadius: 8
     readonly property int notificationWidth: 450
     readonly property int notificationAppIconSize: 25
+    readonly property int themeSwitcherWidth: 1000
+    readonly property int themeSwitcherHeight: 700
+    readonly property real themePreviewRatio: 0.5
 
     // ========= SPACING =========
     readonly property int widgetSpacing: 7
@@ -22,7 +25,7 @@ QtObject {
     // ========= ANIMATIONS =========
     readonly property int clockAnimation: 1000
     readonly property int windowTitleFadeAnimation: 200
-    
+
     // ========= INTERVALS =========
     readonly property int updateInterval: 1000
     readonly property int longUpdateInterval: 5000
