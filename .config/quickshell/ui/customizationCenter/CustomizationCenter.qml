@@ -132,6 +132,7 @@ Rectangle {
                         anchors.fill: parent
                         onClicked: {
                             customizationCenter.currentTab = index;
+                            customizationCenter.forceActiveFocus();
                         }
                     }
 
