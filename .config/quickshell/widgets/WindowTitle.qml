@@ -14,7 +14,7 @@ Row {
         anchors.verticalCenter: parent.verticalCenter
 
         IconImage {
-            source: Quickshell.iconPath(Niri.focusedIconName || "fallback")
+            source: Quickshell.iconPath(Niri.focusedIconName, "fallback")
             implicitWidth: Typography.windowIconSize
             implicitHeight: Typography.windowIconSize
         }
