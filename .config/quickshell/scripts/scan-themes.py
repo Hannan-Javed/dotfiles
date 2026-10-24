@@ -31,16 +31,19 @@ for group_dir in ROOT.iterdir():
                 "id": f"{group_name}/{theme_dir.name}",
                 "name": metadata.get("name", theme_dir.name),
                 "colors": metadata["colors"],
-                "suggestions": metadata["suggestions"],
+                "suggestions": metadata["suggestions"] if metadata["suggestions"] else {},
                 "group": group_name,
                 "path": str(theme_dir),
             }
 
             for ext in ["png", "jpg", "jpeg"]:
                 wallpaper_path = theme_dir / f"wallpaper.{ext}"
-                if wallpaper_path.exists():
+                if wallpaper_path.exists() and not "wallpaper" in theme["suggestions"]:
                     theme["suggestions"]["wallpaper"] = str(wallpaper_path)
-                    break  # Found it, stop looking
+                preview_path = theme_dir / f"preview.{ext}"
+                if preview_path.exists() and not "preview" in theme["suggestions"]:
+                    theme["preview"] = str(preview_path)
+                
 
             themes[group_name].append(theme)
             index[theme["id"]] = theme
