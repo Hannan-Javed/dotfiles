@@ -140,7 +140,6 @@ Item {
         case Qt.Key_Up:
             target = findThemeInDirection("up");
             if (!target) {
-                selectedThemeIndex = -1;
                 customizationCenter.forceActiveFocus();
             } else {
                 let parts = target.split(":");
