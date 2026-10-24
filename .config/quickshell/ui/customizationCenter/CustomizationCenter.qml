@@ -19,6 +19,8 @@ Rectangle {
     border.color: Colors.border
     focus: true
     Keys.onPressed: (event) => {
+        if (!activeFocus)
+            return ;
         switch (event.key) {
         case Qt.Key_Right:
             // limit dynamically based on items in tabRepeater
@@ -27,9 +29,9 @@ Rectangle {
         case Qt.Key_Left:
             currentTab = Math.max(currentTab - 1, 0);
             break;
-        }
-        if (event.key === Qt.Key_Down) {
+        case Qt.Key_Down:
             const page = pages.children[currentTab].forceActiveFocus();
+            break;
         }
     }
 
@@ -139,6 +141,7 @@ Rectangle {
 
         }
         // white seperator line
+
         Rectangle {
             Layout.fillWidth: true
             height: 1
