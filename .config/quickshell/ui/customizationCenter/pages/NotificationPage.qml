@@ -1,28 +1,11 @@
 import "../../../services"
-import QtQuick
-import QtQuick.Controls
+import "../../../theme"
+import "../components"
 
-ScrollView {
-    anchors.margins: 20
-
-    Column {
-        spacing: 20
-
-        Repeater {
-            model: NotificationRegistry.notifications
-
-            delegate: Button {
-                required property var modelData
-
-                width: 250
-                text: modelData.name
-                onClicked: {
-                    CustomizationManager.setSetting("notificationStyle", modelData.name);
-                }
-            }
-
-        }
-
+StyleSelector {
+    items: NotificationRegistry.notifications
+    previewRatio: Metrics.notificationPreviewRatio
+    onActivated: (item) => {
+        UserPreferences.setSetting("notificationStyle", item.name);
     }
-
 }

@@ -13,6 +13,8 @@ QtObject {
     readonly property int notificationAppIconSize: 25
     readonly property int themeSwitcherWidth: 1000
     readonly property int themeSwitcherHeight: 700
+    readonly property real barPreviewRatio: 0.2
+    readonly property real notificationPreviewRatio: 0.3
     readonly property real themePreviewRatio: 0.5
 
     // ========= SPACING =========
