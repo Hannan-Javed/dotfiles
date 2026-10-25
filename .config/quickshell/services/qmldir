@@ -7,11 +7,10 @@ singleton UserPreferences 1.0 customization/UserPreferences.qml
 singleton UIManager 1.0 customization/UIManager.qml
 
 singleton WallpaperManager 1.0 customization/managers/WallpaperManager.qml
-# singleton KittyManager 1.0 customization/managers/KittyManager.qml
+singleton KittyManager 1.0 customization/managers/KittyManager.qml
 # singleton GreetdManager 1.0 customization/managers/GreetdManager.qml
 
 singleton ThemeRegistry 1.0 customization/registeries/ThemeRegistry.qml
 singleton BarRegistry 1.0 customization/registeries/BarRegistry.qml
 singleton NotificationRegistry 1.0 customization/registeries/NotificationRegistry.qml
-# singleton KittyRegistry 1.0 customization/registeries/KittyRegistry.qml
 # singleton GreetdRegistry 1.0 customization/registeries/GreetdRegistry.qml

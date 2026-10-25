@@ -64,7 +64,7 @@ Item {
                     root.barStyle = data.bar || "SimpleBar";
                     root.notificationStyle = data.notification || "SimpleNotification";
                     root.wallpaper = data.wallpaper || "~/.config/quickshell/themes/arch/neon/wallpaper.jpg";
-                    root.kittyStyle = data.kitty || "DefaultKitty";
+                    root.kittyStyle = data.kitty || "default-kitty";
                     root.greetdStyle = data.greetd || "DefaultGreetd";
                 } catch (e) {
                     console.error("Failed loading settings:", e);

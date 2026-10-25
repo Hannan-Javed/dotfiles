@@ -27,6 +27,7 @@
 
 !.config/kitty/
 !.config/kitty/**
+.config/kitty/current-theme.conf
 
 !.config/quickshell/
 !.config/quickshell/**
