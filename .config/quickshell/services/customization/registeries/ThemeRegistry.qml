@@ -33,7 +33,7 @@ Item {
     Process {
         id: scanner
 
-        command: ["python3", Quickshell.env("HOME") + "/.config/quickshell/scripts/scan-themes.py"]
+        command: ["python3", Quickshell.env("HOME") + "/.config/quickshell/scripts/scanners/scan-themes.py"]
 
         stdout: StdioCollector {
             onStreamFinished: {

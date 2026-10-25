@@ -12,7 +12,7 @@ Item {
         if (!currentWallpaper)
             return ;
 
-        wallpaperSetter.command = [Quickshell.env("HOME") + "/.config/quickshell/scripts/set-wallpaper.sh", currentWallpaper];
+        wallpaperSetter.command = [Quickshell.env("HOME") + "/.config/quickshell/scripts/appearance/set-wallpaper.sh", currentWallpaper];
         // Launch it detached so Quickshell doesn't wait for swaybg
         wallpaperSetter.startDetached();
     }

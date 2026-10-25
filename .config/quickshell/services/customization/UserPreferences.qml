@@ -34,7 +34,7 @@ Item {
     }
 
     function save() {
-        saveProcess.command = ["python3", Quickshell.env("HOME") + "/.config/quickshell/scripts/save-settings.py", activeTheme, barStyle, notificationStyle, wallpaper, kittyStyle, greetdStyle];
+        saveProcess.command = ["python3", Quickshell.env("HOME") + "/.config/quickshell/scripts/settings/save-settings.py", activeTheme, barStyle, notificationStyle, wallpaper, kittyStyle, greetdStyle];
         saveProcess.running = true;
     }
 
@@ -53,7 +53,7 @@ Item {
     Process {
         id: loadProcess
 
-        command: ["python3", Quickshell.env("HOME") + "/.config/quickshell/scripts/load-settings.py"]
+        command: ["python3", Quickshell.env("HOME") + "/.config/quickshell/scripts//settings/load-settings.py"]
 
         stdout: StdioCollector {
             onStreamFinished: {
