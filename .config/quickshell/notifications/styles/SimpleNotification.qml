@@ -191,13 +191,12 @@ PanelWindow {
                 MouseArea {
                     anchors.fill: parent
                     onClicked: {
+                        closeNotification();
                         let action = modelData.actions.find((a) => {
                             return a.identifier === "default";
                         });
                         if (action)
                             action.invoke();
-
-                        closeNotification();
                     }
                 }
 
