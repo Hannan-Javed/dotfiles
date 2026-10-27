@@ -1,3 +1,4 @@
+import "../../../services"
 import QtQuick
 import Quickshell
 import Quickshell.Io
@@ -28,7 +29,10 @@ Item {
         return themeIndex[id] || null;
     }
 
-    Component.onCompleted: reload()
+    Component.onCompleted: {
+        RegistryManager.register(root);
+        reload();
+    }
 
     Process {
         id: scanner

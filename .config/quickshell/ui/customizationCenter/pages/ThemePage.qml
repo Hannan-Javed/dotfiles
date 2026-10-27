@@ -130,6 +130,9 @@ Item {
         const themes = ThemeRegistry.getThemes(groupsCache[selectedGroupIndex]);
         let target;
         switch (event.key) {
+        case Qt.Key_R:
+            RegistryManager.reloadAll();
+            break;
         case Qt.Key_Right:
             if (selectedThemeIndex < themes.length - 1) {
                 selectedThemeIndex++;

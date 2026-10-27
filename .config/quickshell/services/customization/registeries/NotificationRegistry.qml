@@ -1,3 +1,4 @@
+import "../../../services"
 import QtQuick
 import Quickshell
 import Quickshell.Io
@@ -26,7 +27,10 @@ Item {
         return null;
     }
 
-    Component.onCompleted: reload()
+    Component.onCompleted: {
+        RegistryManager.register(root);
+        reload();
+    }
 
     Process {
         id: scanner

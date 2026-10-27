@@ -1,3 +1,4 @@
+import "../../../services"
 import QtQuick
 import Quickshell
 import Quickshell.Io
@@ -26,8 +27,10 @@ Item {
         return null;
     }
 
-    Component.onCompleted: reload()
-
+    Component.onCompleted: {
+        RegistryManager.register(root)
+        reload()
+    }
     Process {
         id: scanner
 
@@ -38,7 +41,7 @@ Item {
                 try {
                     root.wallpapers = JSON.parse(text.trim());
                 } catch (e) {
-                    console.error("Failed parsing Notification registry:", e);
+                    console.error("Failed parsing Wallpaper registry:", e);
                 }
             }
         }

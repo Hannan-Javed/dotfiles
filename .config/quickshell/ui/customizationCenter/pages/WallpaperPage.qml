@@ -42,6 +42,9 @@ Item {
     Keys.onPressed: (event) => {
         let target;
         switch (event.key) {
+        case Qt.Key_R:
+            RegistryManager.reloadAll();
+            break;
         case Qt.Key_Left:
             if (selectedIndex > 0) {
                 selectedIndex--;

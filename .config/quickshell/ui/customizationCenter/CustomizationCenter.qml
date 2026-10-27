@@ -23,6 +23,9 @@ Rectangle {
             return ;
 
         switch (event.key) {
+        case Qt.Key_R:
+            RegistryManager.reloadAll();
+            break;
         case Qt.Key_Right:
             // limit dynamically based on items in tabRepeater
             currentTab = Math.min(currentTab + 1, tabRepeater.count - 1);
@@ -54,7 +57,7 @@ Rectangle {
             font.bold: true
         }
 
-        Row {
+        RowLayout {
             id: tabsRow
 
             Layout.fillWidth: true
@@ -137,6 +140,38 @@ Rectangle {
                         }
                     }
 
+                }
+
+            }
+
+            Item {
+                Layout.fillWidth: true
+            }
+
+            Rectangle {
+                id: refreshButton
+
+                width: 34
+                height: 34
+                radius: 6
+                color: refreshMouse.containsMouse ? Qt.alpha(Colors.border, 0.15) : "transparent"
+                border.width: refreshMouse.containsMouse ? 1 : 0
+                border.color: Colors.border
+
+                Text {
+                    anchors.centerIn: parent
+                    text: "↻"
+                    font.family: "JetBrains Mono"
+                    font.pixelSize: 16
+                    color: refreshMouse.containsMouse ? Colors.textPrimary : Colors.textSecondary
+                }
+
+                MouseArea {
+                    id: refreshMouse
+
+                    anchors.fill: parent
+                    hoverEnabled: true
+                    onClicked: RegistryManager.reloadAll()
                 }
 
             }

@@ -1,3 +1,4 @@
+import "../../../services"
 import "../../../theme"
 import "../../customizationCenter"
 import QtQuick
@@ -19,7 +20,6 @@ Item {
     signal activated(var item)
 
     function ensureSelectedVisible() {
-        console.lg;
         let item = itemDelegates[selectedIndex];
         if (!item)
             return ;
@@ -42,6 +42,9 @@ Item {
     }
     Keys.onPressed: (event) => {
         switch (event.key) {
+        case Qt.Key_R:
+            RegistryManager.reloadAll();
+            break;
         case Qt.Key_Up:
             if (selectedIndex > 0)
                 selectedIndex--;
