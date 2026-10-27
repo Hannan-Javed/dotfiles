@@ -21,6 +21,7 @@ Rectangle {
     Keys.onPressed: (event) => {
         if (!activeFocus)
             return ;
+
         switch (event.key) {
         case Qt.Key_Right:
             // limit dynamically based on items in tabRepeater
@@ -62,7 +63,7 @@ Rectangle {
             Repeater {
                 id: tabRepeater
 
-                model: ["Themes", "Bars", "Notifications"]
+                model: ["Themes", "Bars", "Notifications", "Wallpapers"]
 
                 delegate: Item {
                     required property int index
@@ -164,6 +165,9 @@ Rectangle {
             }
 
             NotificationPage {
+            }
+
+            WallpaperPage {
             }
 
         }

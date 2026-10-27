@@ -13,4 +13,5 @@ singleton KittyManager 1.0 customization/managers/KittyManager.qml
 singleton ThemeRegistry 1.0 customization/registeries/ThemeRegistry.qml
 singleton BarRegistry 1.0 customization/registeries/BarRegistry.qml
 singleton NotificationRegistry 1.0 customization/registeries/NotificationRegistry.qml
+singleton WallpaperRegistry 1.0 customization/registeries/WallpaperRegistry.qml
 # singleton GreetdRegistry 1.0 customization/registeries/GreetdRegistry.qml
