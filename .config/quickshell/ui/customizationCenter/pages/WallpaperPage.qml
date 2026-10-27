@@ -20,7 +20,7 @@ Item {
             return ;
 
         let flickable = scrollArea.contentItem;
-        let pos = item.mapToItem(gridContainer, 0, 0);
+        let pos = item.mapToItem(wallpaperGrid, 0, 0);
         let top = pos.y;
         let bottom = top + item.height;
         if (top < flickable.contentY)
@@ -46,12 +46,10 @@ Item {
             RegistryManager.reloadAll();
             break;
         case Qt.Key_Left:
-            if (selectedIndex > 0) {
+            if (selectedIndex > 0)
                 selectedIndex--;
-            } else {
-                customizationCenter.tabFocus = true;
+            else
                 customizationCenter.forceActiveFocus();
-            }
             event.accepted = true;
             break;
         case Qt.Key_Right:
@@ -93,90 +91,82 @@ Item {
         anchors.fill: parent
         clip: true
 
-        Item {
-            id: gridContainer
+        Grid {
+            id: wallpaperGrid
 
-            width: scrollArea.availableWidth
-            height: wallpaperGrid.implicitHeight
+            width: parent.width
+            columns: root.columns
+            spacing: Metrics.wallpaperTileSpacing
 
-            Grid {
-                id: wallpaperGrid
+            Repeater {
+                model: root.wallpapers
 
-                width: parent.width
-                columns: root.columns
-                spacing: Metrics.wallpaperTileSpacing
+                delegate: Rectangle {
+                    id: wallpaperCard
 
-                Repeater {
-                    model: root.wallpapers
+                    required property var modelData
+                    required property int index
+                    readonly property bool selected: root.selectedIndex === index
 
-                    delegate: Rectangle {
-                        id: wallpaperCard
+                    width: Metrics.wallpaperTileWidth
+                    height: Metrics.wallpaperTileHeight
+                    radius: 8
+                    color: selected ? Qt.alpha(Colors.border, 0.15) : "transparent"
+                    border.width: selected ? 1 : 0
+                    border.color: Colors.border
+                    Component.onCompleted: {
+                        root.wallpaperItems[index] = wallpaperCard;
+                    }
 
-                        required property var modelData
-                        required property int index
-                        readonly property bool selected: root.selectedIndex === index
+                    Column {
+                        anchors.fill: parent
+                        anchors.margins: 8
+                        spacing: 8
 
-                        width: Metrics.wallpaperTileWidth
-                        height: Metrics.wallpaperTileHeight
-                        radius: 8
-                        color: selected ? Qt.alpha(Colors.border, 0.15) : "transparent"
-                        border.width: selected ? 1 : 0
-                        border.color: Colors.border
-                        Component.onCompleted: {
-                            root.wallpaperItems[index] = wallpaperCard;
+                        Text {
+                            width: parent.width
+                            height: 24
+                            text: modelData.name
+                            color: wallpaperCard.selected ? Colors.textPrimary : Colors.textSecondary
+                            horizontalAlignment: Text.AlignHCenter
+                            verticalAlignment: Text.AlignVCenter
+                            elide: Text.ElideRight
+                            font.family: "JetBrains Mono"
+                            font.pixelSize: 13
                         }
 
-                        Column {
-                            anchors.fill: parent
-                            anchors.margins: 8
-                            spacing: 8
+                        Rectangle {
+                            width: parent.width
+                            height: parent.height - 32
+                            radius: 6
+                            clip: true
+                            color: Colors.surface ?? Colors.background
 
-                            Text {
-                                width: parent.width
-                                height: 24
-                                text: modelData.name
-                                color: wallpaperCard.selected ? Colors.textPrimary : Colors.textSecondary
-                                horizontalAlignment: Text.AlignHCenter
-                                verticalAlignment: Text.AlignVCenter
-                                elide: Text.ElideRight
-                                font.family: "JetBrains Mono"
-                                font.pixelSize: 13
-                            }
-
-                            Rectangle {
-                                width: parent.width
-                                height: parent.height - 32
-                                radius: 6
-                                clip: true
-                                color: Colors.surface ?? Colors.background
-
-                                Image {
-                                    anchors.fill: parent
-                                    source: modelData.path
-                                    fillMode: Image.PreserveAspectCrop
-                                    asynchronous: true
-                                    cache: true
-                                    smooth: true
-                                    mipmap: true
-                                }
-
+                            Image {
+                                anchors.fill: parent
+                                source: modelData.path
+                                fillMode: Image.PreserveAspectCrop
+                                asynchronous: true
+                                cache: true
+                                smooth: true
+                                mipmap: true
                             }
 
                         }
 
-                        MouseArea {
-                            anchors.fill: parent
-                            onClicked: {
-                                root.forceActiveFocus();
-                                root.selectedIndex = wallpaperCard.index;
-                            }
-                            onDoubleClicked: {
-                                root.forceActiveFocus();
-                                root.selectedIndex = wallpaperCard.index;
-                                root.applySelectedWallpaper();
-                            }
-                        }
+                    }
 
+                    MouseArea {
+                        anchors.fill: parent
+                        onClicked: {
+                            root.forceActiveFocus();
+                            root.selectedIndex = wallpaperCard.index;
+                        }
+                        onDoubleClicked: {
+                            root.forceActiveFocus();
+                            root.selectedIndex = wallpaperCard.index;
+                            root.applySelectedWallpaper();
+                        }
                     }
 
                 }
