@@ -131,7 +131,7 @@ Item {
                             horizontalAlignment: Text.AlignHCenter
                             verticalAlignment: Text.AlignVCenter
                             elide: Text.ElideRight
-                            font.family: "JetBrains Mono"
+                            font.family: Typography.fontFamily
                             font.pixelSize: 13
                         }
 

@@ -85,7 +85,7 @@ Rectangle {
                             text: "["
                             color: Colors.border
                             opacity: parent.parent.selected ? 1 : 0
-                            font.family: "JetBrains Mono"
+                            font.family: Typography.fontFamily
                             font.pixelSize: 15
 
                             Behavior on opacity {
@@ -102,7 +102,7 @@ Rectangle {
 
                             text: modelData
                             color: parent.parent.selected ? Colors.textPrimary : Colors.textSecondary
-                            font.family: "JetBrains Mono"
+                            font.family: Typography.fontFamily
                             font.pixelSize: 15
 
                             Behavior on color {
@@ -118,7 +118,7 @@ Rectangle {
                             text: "]"
                             color: Colors.border
                             opacity: parent.parent.selected ? 1 : 0
-                            font.family: "JetBrains Mono"
+                            font.family: Typography.fontFamily
                             font.pixelSize: 15
 
                             Behavior on opacity {
@@ -161,8 +161,8 @@ Rectangle {
                 Text {
                     anchors.centerIn: parent
                     text: "↻"
-                    font.family: "JetBrains Mono"
-                    font.pixelSize: 16
+                    font.family: Typography.fontFamily
+                    font.pixelSize: 28
                     color: refreshMouse.containsMouse ? Colors.textPrimary : Colors.textSecondary
                 }
 

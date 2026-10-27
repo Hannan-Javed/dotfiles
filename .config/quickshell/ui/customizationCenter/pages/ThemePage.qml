@@ -227,7 +227,7 @@ Item {
                         Text {
                             text: ":: " + groupColumn.modelData.toUpperCase()
                             color: Colors.border
-                            font.family: "JetBrains Mono"
+                            font.family: Typography.fontFamily
                             font.pixelSize: 16
                             font.bold: true
                         }
@@ -263,7 +263,7 @@ Item {
                                         anchors.centerIn: parent
                                         text: modelData.name
                                         color: selected ? Colors.textPrimary : Colors.textSecondary
-                                        font.family: "JetBrains Mono"
+                                        font.family: Typography.fontFamily
                                         font.pixelSize: 14
                                     }
 
@@ -319,7 +319,7 @@ Item {
                     width: parent.width
                     horizontalAlignment: Text.AlignHCenter
                     color: Colors.textSecondary
-                    font.family: "JetBrains Mono"
+                    font.family: Typography.fontFamily
                     font.pixelSize: 13
                 }
 

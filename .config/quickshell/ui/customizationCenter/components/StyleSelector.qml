@@ -111,7 +111,7 @@ Item {
                             anchors.centerIn: parent
                             text: modelData.name
                             color: selected ? Colors.textPrimary : Colors.textSecondary
-                            font.family: "JetBrains Mono"
+                            font.family: Typography.fontFamily
                             font.pixelSize: 14
                         }
 

@@ -35,7 +35,7 @@ Item {
             text: root.title
 
             color: Colors.textSecondary
-            font.family: "JetBrains Mono"
+            font.family: Typography.fontFamily
             font.pixelSize: 13
         }
     }
