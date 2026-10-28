@@ -8,6 +8,7 @@ singleton UIManager 1.0 customization/UIManager.qml
 
 singleton WallpaperManager 1.0 customization/managers/WallpaperManager.qml
 singleton KittyManager 1.0 customization/managers/KittyManager.qml
+singleton NiriManager 1.0 customization/managers/NiriManager.qml
 # singleton GreetdManager 1.0 customization/managers/GreetdManager.qml
 
 singleton RegistryManager 1.0 customization/RegistryManager.qml

@@ -20,6 +20,7 @@ ShellRoot {
     Component.onCompleted: {
         const awakeWallpaper = WallpaperManager;
         const awakeKitty = KittyManager;
+        const awakeNiri = NiriManager;
     }
 
     Bar {

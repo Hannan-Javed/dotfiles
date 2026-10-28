@@ -24,6 +24,7 @@
 
 !.config/niri/
 !.config/niri/**
+.config/niri/current-theme.kdl
 
 !.config/kitty/
 !.config/kitty/**

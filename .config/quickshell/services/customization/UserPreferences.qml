@@ -14,6 +14,7 @@ Item {
     property string notificationStyle
     property string wallpaper
     property string kittyStyle
+    property string niriStyle
     property string greetdStyle
 
     function restore() {
@@ -65,6 +66,7 @@ Item {
                     root.notificationStyle = data.notification || "SimpleNotification";
                     root.wallpaper = data.wallpaper || "~/.config/quickshell/themes/arch/neon/wallpaper.jpg";
                     root.kittyStyle = data.kitty || "default-kitty";
+                    root.kittyStyle = data.kitty || "default-niri";
                     root.greetdStyle = data.greetd || "DefaultGreetd";
                 } catch (e) {
                     console.error("Failed loading settings:", e);

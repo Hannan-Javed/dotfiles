@@ -1,0 +1,13 @@
+
+layout {
+    focus-ring {
+        // active-color "#7fc8ff"
+
+        inactive-color "#505050"
+
+        urgent-color "#9b0000"
+
+        active-gradient from="#e71f1f" to="#0dff86b4" angle=45 in="oklch longer hue"
+
+    }
+}

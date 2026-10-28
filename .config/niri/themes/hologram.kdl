@@ -1,0 +1,23 @@
+layout {
+    focus-ring {
+    width 3
+
+    active-color "#7df9ff"
+    inactive-color "#506070"
+    urgent-color "#ff5555"
+
+    active-gradient from="#7df9ff" to="#00ffb3" angle=90
+}
+
+shadow {
+    on
+
+    softness 35
+    spread 6
+    offset x=0 y=10
+
+    color "#7df9ff50"
+}
+
+
+}
