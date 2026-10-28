@@ -719,3 +719,5 @@ window-rule {
     geometry-corner-radius 6
     clip-to-geometry true
 }
+
+include optional=true "current-theme.kdl"
