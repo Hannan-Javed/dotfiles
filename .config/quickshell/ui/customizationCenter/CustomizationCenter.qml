@@ -12,11 +12,8 @@ Rectangle {
 
     implicitWidth: Metrics.themeSwitcherWidth
     implicitHeight: Metrics.themeSwitcherHeight
-    radius: 12
     color: Colors.background
     opacity: 0.9
-    border.width: 1
-    border.color: Colors.border
     focus: true
     Keys.onPressed: (event) => {
         if (!activeFocus)

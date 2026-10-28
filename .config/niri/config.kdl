@@ -337,6 +337,11 @@ animations {
     // Slow down all animations by this factor. Values below 1 speed them up instead.
     // slowdown 3.0
 }
+// generic rules for all windows, can be overridden by window-rule for specific apps by declarations below
+window-rule {
+    geometry-corner-radius 6
+    clip-to-geometry true
+}
 
 // Window rules let you adjust behavior for individual windows.
 // Find more information on the wiki:
@@ -363,8 +368,9 @@ window-rule {
 window-rule {
     match app-id="^org.quickshell$"
     open-floating true
+    geometry-corner-radius 12
     focus-ring {
-        off
+        width 1
     }
 }
 window-rule {
@@ -715,9 +721,5 @@ window-rule {
     draw-border-with-background false
 }
 
-window-rule {
-    geometry-corner-radius 6
-    clip-to-geometry true
-}
 
 include optional=true "current-theme.kdl"
