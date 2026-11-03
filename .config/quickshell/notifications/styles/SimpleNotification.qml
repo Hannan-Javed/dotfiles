@@ -4,28 +4,10 @@ import QtQuick
 import Quickshell
 import Quickshell.Services.Notifications
 
-PanelWindow {
-    id: root
-
-    exclusionMode: ExclusionMode.Ignore
-    color: "transparent"
-    implicitWidth: notificationsColumn.width
-    implicitHeight: notificationsColumn.height
-
-    anchors {
-        top: true
-        right: true
-    }
-
-    margins {
-        top: Metrics.notificationTopMargin
-        right: 14
-    }
-
+Scope {
     NotificationServer {
         id: server
 
-        // Crucial for Firefox, Chrome etc
         actionsSupported: true
         bodyImagesSupported: true
         actionIconsSupported: true
@@ -37,193 +19,218 @@ PanelWindow {
                 notification.expireAt = Date.now() + Metrics.notificationInterval;
 
             notification.animatedIn = false;
+            console.log("Notification received:", JSON.stringify(notification));
             NotificationHistory.add(notification);
         }
     }
 
-    Column {
-        id: notificationsColumn
+    Variants {
+        model: Quickshell.screens
 
-        // vertical spacing between multiple notifications
-        spacing: 10
+        delegate: PanelWindow {
+            id: root
 
-        Repeater {
-            model: server.trackedNotifications.values
+            required property ShellScreen modelData
 
-            //  notification card starts from here
-            delegate: Rectangle {
-                id: root
+            screen: modelData
+            exclusionMode: ExclusionMode.Ignore
+            color: "transparent"
+            implicitWidth: notificationsColumn.width
+            implicitHeight: notificationsColumn.height
 
-                required property var modelData
-                readonly property int hiddenX: width + 50
-                readonly property string previewImage: {
-                    // make previewImage use appicon instead
-                    if (modelData.appName === "niri" && modelData.appIcon !== "" && modelData.image === "")
-                        return modelData.appIcon;
+            anchors {
+                top: true
+                right: true
+            }
 
-                    // make appIcon use previewImage instead
-                    if ((modelData.appName === "NetworkManager Applet" || modelData.appName === "pcloud") && modelData.appIcon === "" && modelData.image !== "")
-                        return "";
+            margins {
+                top: Metrics.notificationTopMargin
+                right: 14
+            }
 
-                    return modelData.image;
-                }
-                readonly property string finalAppIcon: {
-                    // make previewImage use appicon instead
-                    if (modelData.appName === "niri" && modelData.appIcon !== "" && modelData.image === "")
-                        return "";
+            Column {
+                id: notificationsColumn
 
-                    // make appIcon use previewImage instead
-                    if ((modelData.appName === "NetworkManager Applet" || modelData.appName === "pcloud") && modelData.appIcon === "" && modelData.image !== "")
-                        return modelData.image;
+                // vertical spacing between multiple notifications
+                spacing: 10
 
-                    return modelData.appIcon;
-                }
+                Repeater {
+                    model: server.trackedNotifications.values
 
-                function isImageSource(icon) {
-                    return icon && icon !== "" && (icon.startsWith("/") || icon.startsWith("file://") || icon.startsWith("image://"));
-                }
+                    //  notification card starts from here
+                    delegate: Rectangle {
+                        id: notificationRoot
 
-                function closeNotification() {
-                    slide.x = root.hiddenX;
-                    closeTimer.start();
-                }
+                        required property var modelData
+                        readonly property int hiddenX: width + 50
+                        readonly property string previewImage: {
+                            // make previewImage use appicon instead
+                            if (modelData.appName === "niri" && modelData.appIcon !== "" && modelData.image === "")
+                                return modelData.appIcon;
 
-                width: Metrics.notificationWidth
-                implicitHeight: content.implicitHeight + 20
-                radius: 16
-                color: Colors.background
-                border.width: Metrics.borderWidth
-                border.color: modelData.urgency === 2 ? Colors.red : Colors.border
-                Component.onCompleted: {
-                    timeoutTimer.interval = Math.max(0, modelData.expireAt - Date.now());
-                    timeoutTimer.start();
-                    if (!modelData.animatedIn) {
-                        slide.x = 0;
-                        modelData.animatedIn = true;
-                    }
-                }
+                            // make appIcon use previewImage instead
+                            if ((modelData.appName === "NetworkManager Applet" || modelData.appName === "pcloud") && modelData.appIcon === "" && modelData.image !== "")
+                                return "";
 
-                Column {
-                    // Header
-                    // Title
-                    // Body
-                    // Notification image
+                            return modelData.image;
+                        }
+                        readonly property string finalAppIcon: {
+                            // make previewImage use appicon instead
+                            if (modelData.appName === "niri" && modelData.appIcon !== "" && modelData.image === "")
+                                return "";
 
-                    id: content
+                            // make appIcon use previewImage instead
+                            if ((modelData.appName === "NetworkManager Applet" || modelData.appName === "pcloud") && modelData.appIcon === "" && modelData.image !== "")
+                                return modelData.image;
 
-                    anchors.fill: parent
-                    anchors.margins: 12
-                    // vertical spacing within the notification
-                    spacing: 6
+                            return modelData.appIcon;
+                        }
 
-                    Row {
-                        // horizontal spacing between appIcon and the app
-                        spacing: 4
+                        function isImageSource(icon) {
+                            return icon && icon !== "" && (icon.startsWith("/") || icon.startsWith("file://") || icon.startsWith("image://"));
+                        }
 
-                        Rectangle {
-                            width: Metrics.notificationAppIconSize
-                            height: Metrics.notificationAppIconSize
-                            radius: 6
-                            color: Colors.background
-                            visible: finalAppIcon !== ""
+                        function closeNotification() {
+                            slide.x = notificationRoot.hiddenX;
+                            closeTimer.start();
+                        }
 
-                            Image {
-                                anchors.fill: parent
-                                anchors.margins: 2
-                                source: isImageSource(finalAppIcon) ? finalAppIcon : Quickshell.iconPath(finalAppIcon, "fallback")
-                                fillMode: Image.PreserveAspectFit
+                        width: Metrics.notificationWidth
+                        implicitHeight: content.implicitHeight + 20
+                        radius: 16
+                        color: Colors.background
+                        border.width: Metrics.borderWidth
+                        border.color: modelData.urgency === 2 ? Colors.red : Colors.border
+                        Component.onCompleted: {
+                            timeoutTimer.interval = Math.max(0, modelData.expireAt - Date.now());
+                            timeoutTimer.start();
+                            if (!modelData.animatedIn) {
+                                slide.x = 0;
+                                modelData.animatedIn = true;
+                            }
+                        }
+
+                        Column {
+                            id: content
+
+                            anchors.fill: parent
+                            anchors.margins: 12
+                            // vertical spacing within the notification
+                            spacing: 6
+
+                            Row {
+                                // horizontal spacing between appIcon and the app
+                                spacing: 4
+
+                                Rectangle {
+                                    width: Metrics.notificationAppIconSize
+                                    height: Metrics.notificationAppIconSize
+                                    radius: 6
+                                    color: Colors.background
+                                    visible: finalAppIcon !== ""
+
+                                    Image {
+                                        anchors.fill: parent
+                                        anchors.margins: 2
+                                        source: isImageSource(finalAppIcon) ? finalAppIcon : Quickshell.iconPath(finalAppIcon, "fallback")
+                                        fillMode: Image.PreserveAspectFit
+                                    }
+
+                                }
+
+                                Text {
+                                    text: modelData.appName || "Notification"
+                                    color: Colors.textSecondary
+                                    font.pixelSize: 14
+                                    font.bold: true
+                                    anchors.verticalCenter: parent.verticalCenter
+                                }
+
+                            }
+
+                            Text {
+                                text: modelData.summary
+                                width: parent.width
+                                color: Colors.textPrimary
+                                font.pixelSize: 15
+                                font.bold: true
+                                wrapMode: Text.NoWrap
+                                elide: Text.ElideRight
+                                maximumLineCount: 1
+                                visible: text !== ""
+                            }
+
+                            Text {
+                                text: modelData.body
+                                width: parent.width
+                                color: Colors.textSecondary
+                                font.pixelSize: 13
+                                wrapMode: Text.NoWrap
+                                elide: Text.ElideRight
+                                maximumLineCount: 10
+                                visible: text !== ""
+                            }
+
+                            Rectangle {
+                                width: parent.width
+                                height: Math.min(width * preview.sourceSize.height / Math.max(preview.sourceSize.width, 1), 250)
+                                color: Colors.background
+                                visible: previewImage !== ""
+
+                                Image {
+                                    id: preview
+
+                                    anchors.fill: parent
+                                    source: previewImage
+                                    fillMode: Image.PreserveAspectFit
+                                    smooth: true
+                                }
+
                             }
 
                         }
 
-                        Text {
-                            text: modelData.appName || "Notification"
-                            color: Colors.textSecondary
-                            font.pixelSize: 14
-                            anchors.verticalCenter: parent.verticalCenter
-                            font.bold: true
-                        }
-
-                    }
-
-                    Text {
-                        text: modelData.summary
-                        width: parent.width
-                        color: Colors.textPrimary
-                        font.pixelSize: 15
-                        font.bold: true
-                        wrapMode: Text.NoWrap
-                        elide: Text.ElideRight
-                        maximumLineCount: 1
-                        visible: text !== ""
-                    }
-
-                    Text {
-                        text: modelData.body
-                        width: parent.width
-                        color: Colors.textSecondary
-                        font.pixelSize: 13
-                        wrapMode: Text.NoWrap
-                        elide: Text.ElideRight
-                        maximumLineCount: 10
-                        visible: text !== ""
-                    }
-
-                    Rectangle {
-                        width: parent.width
-                        height: Math.min(width * preview.sourceSize.height / Math.max(preview.sourceSize.width, 1), 250)
-                        color: Colors.background
-                        visible: previewImage !== ""
-
-                        Image {
-                            id: preview
-
+                        MouseArea {
                             anchors.fill: parent
-                            source: previewImage
-                            fillMode: Image.PreserveAspectFit
-                            smooth: true
+                            onClicked: {
+                                closeNotification();
+                                let action = modelData.actions.find((a) => {
+                                    return a.identifier === "default";
+                                });
+                                if (action)
+                                    action.invoke();
+
+                            }
                         }
 
-                    }
+                        Timer {
+                            id: timeoutTimer
 
-                }
+                            onTriggered: closeNotification()
+                        }
 
-                MouseArea {
-                    anchors.fill: parent
-                    onClicked: {
-                        closeNotification();
-                        let action = modelData.actions.find((a) => {
-                            return a.identifier === "default";
-                        });
-                        if (action)
-                            action.invoke();
-                    }
-                }
+                        Timer {
+                            id: closeTimer
 
-                Timer {
-                    id: timeoutTimer
+                            interval: 250
+                            onTriggered: {
+                                modelData.tracked = false;
+                            }
+                        }
 
-                    onTriggered: closeNotification()
-                }
+                        transform: Translate {
+                            id: slide
 
-                Timer {
-                    id: closeTimer
+                            x: modelData.animatedIn ? 0 : notificationRoot.hiddenX
 
-                    interval: 250
-                    onTriggered: {
-                        modelData.tracked = false;
-                    }
-                }
+                            Behavior on x {
+                                NumberAnimation {
+                                    duration: 250
+                                    easing.type: Easing.OutCubic
+                                }
 
-                transform: Translate {
-                    id: slide
+                            }
 
-                    x: modelData.animatedIn ? 0 : root.hiddenX
-
-                    Behavior on x {
-                        NumberAnimation {
-                            duration: 250
-                            easing.type: Easing.OutCubic
                         }
 
                     }
