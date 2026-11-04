@@ -1,0 +1,11 @@
+{
+  "name": "demon slayer",
+  "author": "Hannan",
+  "version": "1.0",
+  "presets": {
+    "paletteStyle": "purple",
+    "barStyle": "SimpleBar/Bar",
+    "kittyStyle": "jjk",
+    "wallpaper": "Pictures/Wallpapers/wallpaper.png"
+  }
+}

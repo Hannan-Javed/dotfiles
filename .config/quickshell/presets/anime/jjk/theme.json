@@ -1,0 +1,12 @@
+{
+  "name": "Jujutsu Kaisen",
+  "author": "Hannan",
+  "version": "1.0",
+  "presets": {
+    "paletteStyle": "purple",
+    "barStyle": "SimpleBar/Bar",
+    "kittyStyle": "cyberpunk",
+    "niriStyle": "jjk",
+    "wallpaper": "Pictures/Wallpapers/jjk.png"
+  }
+}

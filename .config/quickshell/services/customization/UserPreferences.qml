@@ -36,7 +36,7 @@ Item {
     }
 
     function save() {
-        saveProcess.command = ["python3", Quickshell.env("HOME") + "/.config/quickshell/scripts/settings/save-settings.py", paletteStyle, barStyle, notificationStyle, wallpaper, kittyStyle, greetdStyle];
+        saveProcess.command = ["python3", Quickshell.env("HOME") + "/.config/quickshell/scripts/settings/save-settings.py", activePreset, paletteStyle, barStyle, notificationStyle, wallpaper, kittyStyle, greetdStyle];
         saveProcess.running = true;
     }
 
@@ -62,6 +62,7 @@ Item {
                 try {
                     const data = JSON.parse(text);
                     // enter default values here if file not found (or some properties not set yet)
+                    root.activePreset = data.activePreset || "arch/neon";
                     root.paletteStyle = data.palette || "purple";
                     root.barStyle = data.bar || "SimpleBar/Bar";
                     root.notificationStyle = data.notification || "SimpleNotification/Notification";

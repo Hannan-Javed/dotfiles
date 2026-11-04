@@ -1,0 +1,13 @@
+{
+  "name": "neon",
+  "author": "Hannan",
+  "version": "1.0",
+  "presets": {
+    "paletteStyle": "purple",
+    "barStyle": "SimpleBar/Bar",
+    "notificationStyle": "SimpleNotification",
+    "kittyStyle": "default-kitty",
+    "niriStyle": "neon",
+    "wallpaper": "Pictures/Wallpapers/wallpaper.jpg"
+  }
+}

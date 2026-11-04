@@ -4,13 +4,12 @@ import Quickshell
 import Quickshell.Io
 pragma Singleton
 
-// scanner of themes in quickshell/themes/ directory
 Item {
     id: root
 
-    property var themes: ({
+    property var presets: ({
     })
-    property var themeIndex: ({
+    property var presetIndex: ({
     })
 
     function reload() {
@@ -18,15 +17,15 @@ Item {
     }
 
     function groups() {
-        return Object.keys(themes);
+        return Object.keys(presets);
     }
 
-    function getThemes(group) {
-        return themes[group] || [];
+    function getPresets(group) {
+        return presets[group] || [];
     }
 
-    function getTheme(id) {
-        return themeIndex[id] || null;
+    function getPreset(id) {
+        return presetIndex[id] || null;
     }
 
     Component.onCompleted: {
@@ -37,16 +36,16 @@ Item {
     Process {
         id: scanner
 
-        command: ["python3", Quickshell.env("HOME") + "/.config/quickshell/scripts/scanners/scan-themes.py"]
+        command: ["python3", Quickshell.env("HOME") + "/.config/quickshell/scripts/scanners/scan-presets.py"]
 
         stdout: StdioCollector {
             onStreamFinished: {
                 try {
                     const data = JSON.parse(text);
-                    root.themes = data.themes;
-                    root.themeIndex = data.index;
+                    root.presets = data.presets;
+                    root.presetIndex = data.index;
                 } catch (e) {
-                    console.error("Failed parsing theme registry:", e);
+                    console.error("Failed parsing preset registry:", e);
                 }
             }
         }

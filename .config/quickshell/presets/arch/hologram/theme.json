@@ -1,0 +1,13 @@
+{
+  "author": "Hannan",
+  "name": "Hologram",
+  "version": "1.0",
+  "presets": {
+    "paletteStyle": "glowBlue",
+    "barStyle": "NotSimpleBar",
+    "notificationStyle": "NotSimpleNotification",
+    "kittyStyle": "jjk",
+    "niriStyle": "hologram",
+    "wallpaper": "Pictures/Wallpapers/arch.png"
+  }
+}
