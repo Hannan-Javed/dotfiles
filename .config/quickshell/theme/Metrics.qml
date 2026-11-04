@@ -15,9 +15,10 @@ QtObject {
     // ========= THEME SWITCHER =========
     readonly property int themeSwitcherWidth: 1000
     readonly property int themeSwitcherHeight: 600
+    readonly property real presetPreviewRatio: 0.5
+    readonly property real palettePreviewRatio: 0.2
     readonly property real barPreviewRatio: 0.2
     readonly property real notificationPreviewRatio: 0.3
-    readonly property real themePreviewRatio: 0.5
     readonly property int wallpaperTileWidth: 300
     readonly property int wallpaperTileHeight: 220
     readonly property int wallpaperTileSpacing: 16
