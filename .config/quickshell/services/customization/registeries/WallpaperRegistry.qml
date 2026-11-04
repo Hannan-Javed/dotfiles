@@ -14,10 +14,7 @@ Item {
         scanner.running = true;
     }
 
-    function getWallpapers() {
-        return wallpapers;
-    }
-
+    // helper function, not used currently
     function getWallpaper(name) {
         for (let i = 0; i < wallpapers.length; i++) {
             if (wallpapers[i].name === name)
@@ -33,8 +30,8 @@ Item {
     }
     Process {
         id: scanner
-
-        command: ["python3", Quickshell.env("HOME") + "/.config/quickshell/scripts/scanners/scan-wallpapers.py", Quickshell.env("HOME") + "/.config/quickshell/themes",Quickshell.env("HOME") + "/Pictures/Wallpapers",]
+        // add more arguments here if you want more directories to be scanned for wallpapers
+        command: ["python3", Quickshell.env("HOME") + "/.config/quickshell/scripts/scanners/scan-wallpapers.py" ,Quickshell.env("HOME") + "/Pictures/Wallpapers",]
 
         stdout: StdioCollector {
             onStreamFinished: {

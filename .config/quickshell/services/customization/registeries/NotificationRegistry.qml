@@ -14,10 +14,6 @@ Item {
         scanner.running = true;
     }
 
-    function getNotifications() {
-        return notifications;
-    }
-
     function getNotification(name) {
         for (let i = 0; i < notifications.length; i++) {
             if (notifications[i].name === name)

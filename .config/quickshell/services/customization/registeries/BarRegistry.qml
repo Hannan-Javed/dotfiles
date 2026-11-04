@@ -14,10 +14,6 @@ Item {
         scanner.running = true;
     }
 
-    function getBars() {
-        return bars;
-    }
-
     function getBar(name) {
         for (let i = 0; i < bars.length; i++) {
             if (bars[i].name === name)
