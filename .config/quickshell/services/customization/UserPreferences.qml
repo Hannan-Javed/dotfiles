@@ -9,7 +9,8 @@ pragma Singleton
 Item {
     id: root
 
-    property string activeTheme
+    property string activePreset
+    property string paletteStyle
     property string barStyle
     property string notificationStyle
     property string wallpaper
@@ -35,7 +36,7 @@ Item {
     }
 
     function save() {
-        saveProcess.command = ["python3", Quickshell.env("HOME") + "/.config/quickshell/scripts/settings/save-settings.py", activeTheme, barStyle, notificationStyle, wallpaper, kittyStyle, greetdStyle];
+        saveProcess.command = ["python3", Quickshell.env("HOME") + "/.config/quickshell/scripts/settings/save-settings.py", paletteStyle, barStyle, notificationStyle, wallpaper, kittyStyle, greetdStyle];
         saveProcess.running = true;
     }
 
@@ -54,19 +55,19 @@ Item {
     Process {
         id: loadProcess
 
-        command: ["python3", Quickshell.env("HOME") + "/.config/quickshell/scripts//settings/load-settings.py"]
+        command: ["python3", Quickshell.env("HOME") + "/.config/quickshell/scripts/settings/load-settings.py"]
 
         stdout: StdioCollector {
             onStreamFinished: {
                 try {
                     const data = JSON.parse(text);
                     // enter default values here if file not found (or some properties not set yet)
-                    root.activeTheme = data.theme || "arch/neon";
-                    root.barStyle = data.bar || "SimpleBar";
-                    root.notificationStyle = data.notification || "SimpleNotification";
+                    root.paletteStyle = data.palette || "purple";
+                    root.barStyle = data.bar || "SimpleBar/Bar";
+                    root.notificationStyle = data.notification || "SimpleNotification/Notification";
                     root.wallpaper = data.wallpaper || "~/.config/quickshell/themes/arch/neon/wallpaper.jpg";
                     root.kittyStyle = data.kitty || "default-kitty";
-                    root.kittyStyle = data.kitty || "default-niri";
+                    root.niriStyle = data.kitty || "default-niri";
                     root.greetdStyle = data.greetd || "DefaultGreetd";
                 } catch (e) {
                     console.error("Failed loading settings:", e);

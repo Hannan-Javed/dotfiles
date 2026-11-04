@@ -1,15 +1,17 @@
+import "../services"
 import QtQuick
 pragma Singleton
 
 QtObject {
-    readonly property color background: "#11111b"
-    readonly property color border: "#cba6f7"
-    readonly property color textPrimary: "#cdd6f4"
-    readonly property color textSecondary: "#a6adc8"
+    readonly property color background: PaletteManager.background
+    readonly property color border: PaletteManager.border
+    readonly property color textPrimary: PaletteManager.textPrimary
+    readonly property color textSecondary: PaletteManager.textSecondary
     readonly property color white: "#ffffff"
     readonly property color red: "#f38ba8"
     readonly property color yellow: "#f9e2af"
     readonly property color green: "#a6e3a1"
+    readonly property color blue: '#318aff'
     readonly property color peach: "#fab387"
     readonly property color workspaceInactive: "#45475a"
     readonly property color workspaceActive: border
