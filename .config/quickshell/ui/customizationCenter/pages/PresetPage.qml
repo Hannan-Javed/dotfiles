@@ -8,30 +8,30 @@ import QtQuick.Layouts
 Item {
     id: root
 
-    // mapping of each theme to its rectangle button location
+    // mapping of each preset to its rectangle button location
     // used for navigation and scrolling to out-of-view selection
-    property var themeItems: ({
+    property var presetItems: ({
     })
-    // to allow safe update of both group and theme on change (for when they both change  at same time)
+    // to allow safe update of both group and preset on change (for when they both change  at same time)
     property bool selectionUpdateInProgress: false
     property int selectedGroupIndex: 0
-    property int lastSelectedThemeIndex: -1
-    property int selectedThemeIndex: -1
-    property var groupsCache: ThemeRegistry.groups()
-    property var previewTheme: {
-        if (selectedThemeIndex !== -1 && groupsCache && groupsCache.length > selectedGroupIndex) {
+    property int lastSelectedPresetIndex: -1
+    property int selectedPresetIndex: -1
+    property var groupsCache: PresetRegistry.groups()
+    property var previewPreset: {
+        if (selectedPresetIndex !== -1 && groupsCache && groupsCache.length > selectedGroupIndex) {
             let currentGroup = groupsCache[selectedGroupIndex];
-            let collection = ThemeRegistry.getThemes(currentGroup);
-            if (collection && collection.length > selectedThemeIndex)
-                return collection[selectedThemeIndex];
+            let collection = PresetRegistry.getPresets(currentGroup);
+            if (collection && collection.length > selectedPresetIndex)
+                return collection[selectedPresetIndex];
 
         }
-        return ThemeRegistry.getTheme(UserPreferences.activeTheme);
+        return PresetRegistry.getPreset(UserPreferences.activePreset);
     }
 
-    function findThemeInDirection(direction) {
-        let currentKey = selectedGroupIndex + ":" + selectedThemeIndex;
-        let current = themeItems[currentKey];
+    function findPresetInDirection(direction) {
+        let currentKey = selectedGroupIndex + ":" + selectedPresetIndex;
+        let current = presetItems[currentKey];
         if (!current)
             return null;
 
@@ -42,8 +42,8 @@ Item {
         let best = null;
         let bestScore = Number.MAX_VALUE;
         // find distance of closest button relative to its center (and currently selected center)
-        for (let key in themeItems) {
-            let candidate = themeItems[key];
+        for (let key in presetItems) {
+            let candidate = presetItems[key];
             if (candidate === current)
                 continue;
 
@@ -67,13 +67,14 @@ Item {
                 best = key;
             }
         }
-        // return best groupIndex:themeIndex
+        // return best groupIndex:presetIndex
         return best;
     }
 
     function ensureSelectedVisible() {
-        let key = selectedGroupIndex + ":" + selectedThemeIndex;
-        let item = themeItems[key];
+
+        let key = selectedGroupIndex + ":" + selectedPresetIndex;
+        let item = presetItems[key];
         if (!item)
             return ;
 
@@ -82,12 +83,12 @@ Item {
         let pos_within_scroll = item.mapToItem(scrollContent, 0, 0);
         let firstRowY = Number.MAX_VALUE;
         // to find y of first row
-        for (let key in themeItems) {
+        for (let key in presetItems) {
             let parts = key.split(":");
             if (Number(parts[0]) !== 0)
                 continue;
 
-            let p = themeItems[key].mapToItem(scrollContent, 0, 0);
+            let p = presetItems[key].mapToItem(scrollContent, 0, 0);
             firstRowY = Math.min(firstRowY, p.y);
         }
         // if first row, just scroll to top
@@ -104,11 +105,11 @@ Item {
             flickable.contentY = bottom - scrollArea.height;
     }
 
-    // helper function to ensure both theme and group indexesare updated at the same time
-    function setSelection(groupIndex, themeIndex) {
+    // helper function to ensure both preset and group indexesare updated at the same time
+    function setSelection(groupIndex, presetIndex) {
         selectionUpdateInProgress = true;
         selectedGroupIndex = groupIndex;
-        selectedThemeIndex = themeIndex;
+        selectedPresetIndex = presetIndex;
         selectionUpdateInProgress = false;
         ensureSelectedVisible();
     }
@@ -116,34 +117,34 @@ Item {
     onActiveFocusChanged: {
         if (activeFocus) {
             // if came into selection and there was another selection from firstRow, go to that
-            if (lastSelectedThemeIndex !== -1)
-                selectedThemeIndex = lastSelectedThemeIndex;
+            if (lastSelectedPresetIndex !== -1)
+                selectedPresetIndex = lastSelectedPresetIndex;
             else
-                selectedThemeIndex = 0;
+                selectedPresetIndex = 0;
         } else {
             // store the last selected index
-            lastSelectedThemeIndex = selectedThemeIndex;
-            selectedThemeIndex = -1;
+            lastSelectedPresetIndex = selectedPresetIndex;
+            selectedPresetIndex = -1;
         }
     }
     Keys.onPressed: (event) => {
-        const themes = ThemeRegistry.getThemes(groupsCache[selectedGroupIndex]);
+        const presets = PresetRegistry.getPresets(groupsCache[selectedGroupIndex]);
         let target;
         switch (event.key) {
         case Qt.Key_R:
             RegistryManager.reloadAll();
             break;
         case Qt.Key_Right:
-            if (selectedThemeIndex < themes.length - 1) {
-                selectedThemeIndex++;
+            if (selectedPresetIndex < presets.length - 1) {
+                selectedPresetIndex++;
             } else if (selectedGroupIndex < groupsCache.length - 1) {
                 selectedGroupIndex++;
-                selectedThemeIndex = 0;
+                selectedPresetIndex = 0;
             }
             event.accepted = true;
             break;
         case Qt.Key_Up:
-            target = findThemeInDirection("up");
+            target = findPresetInDirection("up");
             if (!target) {
                 customizationCenter.forceActiveFocus();
             } else {
@@ -153,7 +154,7 @@ Item {
             event.accepted = true;
             break;
         case Qt.Key_Down:
-            target = findThemeInDirection("down");
+            target = findPresetInDirection("down");
             if (target) {
                 let parts = target.split(":");
                 setSelection(Number(parts[0]), Number(parts[1]));
@@ -161,14 +162,14 @@ Item {
             event.accepted = true;
             break;
         case Qt.Key_Left:
-            if (selectedThemeIndex > 0) {
-                selectedThemeIndex--;
+            if (selectedPresetIndex > 0) {
+                selectedPresetIndex--;
             } else if (selectedGroupIndex > 0) {
                 selectedGroupIndex--;
-                selectedThemeIndex = ThemeRegistry.getThemes(groupsCache[selectedGroupIndex]).length - 1;
+                selectedPresetIndex = PresetRegistry.getPresets(groupsCache[selectedGroupIndex]).length - 1;
             } else {
                 customizationCenter.tabFocus = true;
-                selectedThemeIndex = -1;
+                selectedPresetIndex = -1;
                 customizationCenter.forceActiveFocus();
             }
             event.accepted = true;
@@ -176,8 +177,11 @@ Item {
         case Qt.Key_Return:
         case Qt.Key_Enter:
         case Qt.Key_Space:
-            if (selectedThemeIndex !== -1 && themes[selectedThemeIndex])
-                UserPreferences.setSetting("activeTheme", themes[selectedThemeIndex].id);
+            // only for this special case do we need to communicate with preset layer directly, and that will reflect changes in userpreferences and
+            // the managers eventually
+
+            if (selectedPresetIndex !== -1 && presets[selectedPresetIndex])
+                PresetManager.applyPreset(presets[selectedPresetIndex].id);
 
             event.accepted = true;
             break;
@@ -188,7 +192,7 @@ Item {
             ensureSelectedVisible();
 
     }
-    onSelectedThemeIndexChanged: {
+    onSelectedPresetIndexChanged: {
         if (!selectionUpdateInProgress)
             ensureSelectedVisible();
 
@@ -237,28 +241,28 @@ Item {
                             spacing: 16
 
                             Repeater {
-                                model: ThemeRegistry.getThemes(groupColumn.modelData)
+                                model: PresetRegistry.getPresets(groupColumn.modelData)
 
                                 delegate: Rectangle {
-                                    id: themeButton
+                                    id: presetButton
 
                                     required property var modelData
                                     required property int index
-                                    property bool selected: root.selectedGroupIndex === groupColumn.currentGroupIndex && root.selectedThemeIndex === index
+                                    property bool selected: root.selectedGroupIndex === groupColumn.currentGroupIndex && root.selectedPresetIndex === index
 
                                     Component.onCompleted: {
                                         // add this rectangle (once) box for navigation and scroll focusing later
-                                        root.themeItems[groupColumn.currentGroupIndex + ":" + index] = themeButton;
+                                        root.presetItems[groupColumn.currentGroupIndex + ":" + index] = presetButton;
                                     }
                                     radius: 6
                                     color: selected ? Qt.alpha(Colors.border, 0.15) : "transparent"
                                     border.width: selected ? 1 : 0
                                     border.color: Colors.border
-                                    width: themeText.width + 20
+                                    width: presetText.width + 20
                                     height: 34
 
                                     Text {
-                                        id: themeText
+                                        id: presetText
 
                                         anchors.centerIn: parent
                                         text: modelData.name
@@ -272,10 +276,10 @@ Item {
                                         onClicked: {
                                             root.forceActiveFocus();
                                             root.selectedGroupIndex = groupColumn.currentGroupIndex;
-                                            root.selectedThemeIndex = themeButton.index;
+                                            root.selectedPresetIndex = presetButton.index;
                                         }
                                         onDoubleClicked: {
-                                            UserPreferences.setSetting("activeTheme", themeButton.modelData.id);
+                                            PresetManager.applyPreset(presets[selectedPresetIndex].id);
                                         }
                                     }
 
@@ -293,11 +297,11 @@ Item {
 
         }
 
-        // preview image for theme
+        // preview image for preset
         Item {
             SplitView.fillWidth: true
             // only allow a fixed area for the preview
-            SplitView.preferredHeight: root.height * Metrics.themePreviewRatio
+            SplitView.preferredHeight: root.height * Metrics.presetPreviewRatio
 
             Column {
                 anchors.fill: parent
@@ -311,11 +315,11 @@ Item {
                     fillMode: Image.PreserveAspectFit
                     smooth: true
                     mipmap: true
-                    source: root.previewTheme && root.previewTheme.preview ? root.previewTheme.preview : ""
+                    source: root.previewPreset && root.previewPreset.preview ? root.previewPreset.preview : ""
                 }
 
                 Text {
-                    text: root.previewTheme ? root.previewTheme.id : "No Theme Selected"
+                    text: root.previewPreset ? root.previewPreset.id : "No Preset Selected"
                     width: parent.width
                     horizontalAlignment: Text.AlignHCenter
                     color: Colors.textSecondary

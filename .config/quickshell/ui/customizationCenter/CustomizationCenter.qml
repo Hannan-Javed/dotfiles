@@ -63,7 +63,7 @@ Rectangle {
             Repeater {
                 id: tabRepeater
 
-                model: ["Themes", "Bars", "Notifications", "Wallpapers"]
+                model: ["Presets", "Bars", "Notifications", "Wallpapers"]
 
                 delegate: Item {
                     required property int index
@@ -190,7 +190,7 @@ Rectangle {
             Layout.fillHeight: true
             currentIndex: customizationCenter.currentTab
 
-            ThemePage {
+            PresetPage {
             }
 
             BarPage {
