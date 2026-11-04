@@ -14,9 +14,9 @@ Item {
         scanner.running = true;
     }
 
-    function getNotification(name) {
+    function getNotification(id) {        
         for (let i = 0; i < notifications.length; i++) {
-            if (notifications[i].name === name)
+            if (notifications[i].id === id)
                 return notifications[i];
 
         }
