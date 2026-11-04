@@ -63,7 +63,7 @@ Rectangle {
             Repeater {
                 id: tabRepeater
 
-                model: ["Presets", "Bars", "Notifications", "Wallpapers"]
+                model: ["Presets", "Colors", "Bars", "Notifications", "Wallpapers"]
 
                 delegate: Item {
                     required property int index
@@ -191,6 +191,9 @@ Rectangle {
             currentIndex: customizationCenter.currentTab
 
             PresetPage {
+            }
+
+            PalettePage {
             }
 
             BarPage {
