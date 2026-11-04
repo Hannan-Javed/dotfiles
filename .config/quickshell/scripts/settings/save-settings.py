@@ -5,12 +5,13 @@ import sys
 from pathlib import Path
 
 settings = {
-    "theme": sys.argv[1],
-    "bar": sys.argv[2],
-    "notification": sys.argv[3],
-    "wallpaper": sys.argv[4],
-    "kitty": sys.argv[5],
-    "greetd": sys.argv[6]
+    "activePreset": sys.argv[1],
+    "palette": sys.argv[2],
+    "bar": sys.argv[3],
+    "notification": sys.argv[4],
+    "wallpaper": sys.argv[5],
+    "kitty": sys.argv[6],
+    "greetd": sys.argv[7]
 }
 
 path = Path.home() / ".config/quickshell/user-preferences.json"
