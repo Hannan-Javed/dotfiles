@@ -7,6 +7,6 @@ StyleSelector {
     previewRatio: Metrics.barPreviewRatio
     appliedStyle: BarRegistry.getBar(UserPreferences.barStyle)
     onActivated: (item) => {
-        UserPreferences.setSetting("barStyle", item.name);
+        UserPreferences.setSetting("barStyle", item.id);
     }
 }

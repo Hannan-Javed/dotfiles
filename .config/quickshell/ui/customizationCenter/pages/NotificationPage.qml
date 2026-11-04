@@ -7,6 +7,6 @@ StyleSelector {
     previewRatio: Metrics.notificationPreviewRatio
     appliedStyle: NotificationRegistry.getNotification(UserPreferences.notificationStyle)
     onActivated: (item) => {
-        UserPreferences.setSetting("notificationStyle", item.name);
+        UserPreferences.setSetting("notificationStyle", item.id);
     }
 }
