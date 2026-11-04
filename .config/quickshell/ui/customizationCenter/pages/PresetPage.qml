@@ -168,7 +168,6 @@ Item {
                 selectedGroupIndex--;
                 selectedPresetIndex = PresetRegistry.getPresets(groupsCache[selectedGroupIndex]).length - 1;
             } else {
-                customizationCenter.tabFocus = true;
                 selectedPresetIndex = -1;
                 customizationCenter.forceActiveFocus();
             }
