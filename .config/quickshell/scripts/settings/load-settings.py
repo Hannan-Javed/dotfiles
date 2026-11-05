@@ -1,11 +1,13 @@
 #!/usr/bin/env python3
 
-import json
 from pathlib import Path
+import sys
+
+SCRIPT_DIR = Path(__file__).resolve().parent
+sys.path.insert(0, str(SCRIPT_DIR.parent))
+
+from utils.load_json import load_json
 
 path = Path.home() / ".config/quickshell/user-preferences.json"
 
-if path.exists():
-    print(path.read_text())
-else:
-    print("{}")
+print(load_json(path))

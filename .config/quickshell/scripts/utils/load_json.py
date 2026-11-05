@@ -1,5 +1,6 @@
 import json
 import sys
+from pathlib import Path
 
 def load_json(path: Path):
     try:
