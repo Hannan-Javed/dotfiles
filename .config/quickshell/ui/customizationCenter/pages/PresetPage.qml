@@ -72,7 +72,6 @@ Item {
     }
 
     function ensureSelectedVisible() {
-
         let key = selectedGroupIndex + ":" + selectedPresetIndex;
         let item = presetItems[key];
         if (!item)
@@ -128,6 +127,7 @@ Item {
         }
     }
     Keys.onPressed: (event) => {
+
         const presets = PresetRegistry.getPresets(groupsCache[selectedGroupIndex]);
         let target;
         switch (event.key) {
@@ -278,7 +278,9 @@ Item {
                                             root.selectedPresetIndex = presetButton.index;
                                         }
                                         onDoubleClicked: {
-                                            PresetManager.applyPreset(presets[selectedPresetIndex].id);
+                                            root.selectedGroupIndex = groupColumn.currentGroupIndex;
+                                            root.selectedPresetIndex = presetButton.index;
+                                            PresetManager.applyPreset(PresetRegistry.getPresets(groupsCache[selectedGroupIndex])[selectedPresetIndex].id);
                                         }
                                     }
 
