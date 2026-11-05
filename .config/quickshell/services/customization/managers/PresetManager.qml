@@ -8,13 +8,14 @@ QtObject {
     function applyPreset(presetId) {
         if (!registryIndex || Object.keys(registryIndex).length === 0)
             return ;
+
         const preset = registryIndex[presetId];
         if (!preset) {
             console.warn("Preset not found:", presetId);
             return ;
         }
         // metadata
-        UserPreferences.activePreset = presetId;
+        UserPreferences.setSetting("activePreset", presetId);
         for (const key in preset.presets) {
             const value = preset.presets[key];
             UserPreferences.setSetting(key, value);
