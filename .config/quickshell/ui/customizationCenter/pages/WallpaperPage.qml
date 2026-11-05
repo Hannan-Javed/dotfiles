@@ -165,7 +165,7 @@ Item {
                         onDoubleClicked: {
                             root.forceActiveFocus();
                             root.selectedIndex = wallpaperCard.index;
-                            root.applySelectedWallpaper();
+                            UserPreferences.setSetting("wallpaper", root.wallpapers[root.selectedIndex].path);
                         }
                     }
 
