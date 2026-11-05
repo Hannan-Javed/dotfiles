@@ -77,7 +77,7 @@ Item {
         case Qt.Key_Enter:
         case Qt.Key_Space:
             let wallpaper = wallpapers[selectedIndex];
-            if (selectedIndex && wallpaper)
+            if (selectedIndex !== -1 && wallpaper)
                 UserPreferences.setSetting("wallpaper", wallpaper.path);
 
             event.accepted = true;
