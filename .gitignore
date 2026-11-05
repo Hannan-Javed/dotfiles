@@ -24,11 +24,11 @@
 
 !.config/niri/
 !.config/niri/**
-.config/niri/current-theme.kdl
+.config/niri/current-style.kdl
 
 !.config/kitty/
 !.config/kitty/**
-.config/kitty/current-theme.conf
+.config/kitty/current-style.conf
 
 !.config/quickshell/
 !.config/quickshell/**

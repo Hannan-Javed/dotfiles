@@ -11,7 +11,8 @@ Item {
     onCurrentKittyStyleChanged: {
         if (!currentKittyStyle)
             return ;
-        kittyStyleSetter.command = [Quickshell.env("HOME") + "/.config/quickshell/scripts/appearance/set-kitty-theme.sh", currentKittyStyle];
+
+        kittyStyleSetter.command = [Quickshell.env("HOME") + "/.config/quickshell/scripts/appearance/set-style.sh", currentKittyStyle, Quickshell.env("HOME") + "/.config/kitty"];
         kittyStyleSetter.startDetached();
     }
 
