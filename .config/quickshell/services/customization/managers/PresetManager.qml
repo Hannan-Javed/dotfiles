@@ -19,7 +19,6 @@ QtObject {
             const value = preset.presets[key];
             UserPreferences.setSetting(key, value);
         }
-        console.log("Applied preset:", presetId);
     }
 
 }

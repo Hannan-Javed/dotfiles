@@ -6,23 +6,33 @@ import Quickshell
 import Quickshell.Io
 pragma Singleton
 
-Item {
+QtObject {
     id: root
 
-    property string activePreset
-    property string paletteStyle
-    property string barStyle
-    property string notificationStyle
-    property string wallpaper
-    property string kittyStyle
-    property string niriStyle
-    property string greetdStyle
+    // default values for styles go here
+    property string activePreset: "arch/neon"
+    property string paletteStyle: "purple"
+    property string barStyle: "SimpleBar/Bar"
+    property string notificationStyle: "SimpleNotification"
+    property string wallpaper: Quickshell.env("HOME") + "Pictures/Wallpapers/wallpaper.jpg"
+    property string kittyStyle: "default-kitty"
+    property string niriStyle: "default-niri"
+    property string greetdStyle: "DefaultGreetd"
+    // assign the FileView object to a property name
+    property FileView settingsFile
+
+    function getConfigKeys() {
+        const ignoredKeys = ["objectName", "settingsFile", "fileComponent"];
+        return Object.keys(root).filter((key) => {
+            // Ignore QML internals, functions, and explicitly ignored objects
+            return !ignoredKeys.includes(key) && !key.startsWith("__") && typeof root[key] !== "function";
+        });
+    }
 
     function restore() {
         load();
     }
 
-    // central setter function to update state
     function setSetting(key, value) {
         if (!key)
             return ;
@@ -30,52 +40,51 @@ Item {
         if (root.hasOwnProperty(key)) {
             root[key] = value;
             save();
+            console.log("Applied style:", key, value);
         } else {
-            console.warn("Attempted to set an invalid configuration key:", key);
+            console.warn("Attempted to set invalid configuration key:", key);
         }
     }
 
     function save() {
-        saveProcess.command = ["python3", Quickshell.env("HOME") + "/.config/quickshell/scripts/settings/save-settings.py", activePreset, paletteStyle, barStyle, notificationStyle, wallpaper, kittyStyle, greetdStyle];
-        saveProcess.running = true;
+        const obj = {
+        };
+        const keys = getConfigKeys();
+        for (let i = 0; i < keys.length; i++) {
+            const key = keys[i];
+            obj[key] = root[key];
+        }
+        settingsFile.setText(JSON.stringify(obj, null, 4));
     }
 
     function load() {
-        loadProcess.running = true;
+        try {
+            const content = settingsFile.text();
+            if (!content || content.trim() === "")
+                return ;
+
+            const data = JSON.parse(content);
+            const keys = getConfigKeys();
+            for (let i = 0; i < keys.length; i++) {
+                const key = keys[i];
+                if (data.hasOwnProperty(key))
+                    root[key] = data[key];
+
+            }
+        } catch (e) {
+            console.warn("Failed loading settings:", e);
+        }
     }
 
     Component.onCompleted: {
         restore();
     }
 
-    Process {
-        id: saveProcess
-    }
+    settingsFile: FileView {
+        id: fileComponent
 
-    Process {
-        id: loadProcess
-
-        command: ["python3", Quickshell.env("HOME") + "/.config/quickshell/scripts/settings/load-settings.py"]
-
-        stdout: StdioCollector {
-            onStreamFinished: {
-                try {
-                    const data = JSON.parse(text);
-                    // enter default values here if file not found (or some properties not set yet)
-                    root.activePreset = data.activePreset || "arch/neon";
-                    root.paletteStyle = data.palette || "purple";
-                    root.barStyle = data.bar || "SimpleBar/Bar";
-                    root.notificationStyle = data.notification || "SimpleNotification/Notification";
-                    root.wallpaper = data.wallpaper || "~/.config/quickshell/themes/arch/neon/wallpaper.jpg";
-                    root.kittyStyle = data.kitty || "default-kitty";
-                    root.niriStyle = data.kitty || "default-niri";
-                    root.greetdStyle = data.greetd || "DefaultGreetd";
-                } catch (e) {
-                    console.error("Failed loading settings:", e);
-                }
-            }
-        }
-
+        path: Quickshell.env("HOME") + "/.config/quickshell/user-preferences.json"
+        blockLoading: true // Important - Enforces immediate I/O completion for singletons otherwise will return empty for load() function
     }
 
 }
