@@ -9,7 +9,7 @@ sys.path.insert(0, str(SCRIPT_DIR.parent))
 from utils.file_search import find_metadata_file, find_preview_file
 from utils.load_json import load_json
 
-ROOT = Path.home() / ".config/quickshell/presets"
+ROOT = Path.home() / (sys.argv[1] if len(sys.argv) > 1 else ".config/quickshell/presets")
 
 presets = {}
 index = {}
