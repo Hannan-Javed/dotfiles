@@ -302,7 +302,7 @@ environment {
 
 spawn-at-startup "qs"
 spawn-sh-at-startup "sleep 1 & wayscriber -d"
-spawn-sh-at-startup "awww-daemon"
+spawn-at-startup "awww-daemon"
 
 // To run a shell command (with variables, pipes, etc.), use spawn-sh-at-startup:
 // spawn-sh-at-startup "qs -c ~/source/qs/MyAwesomeShell"
@@ -722,4 +722,4 @@ window-rule {
 }
 
 
-include optional=true "current-theme.kdl"
+include optional=true "current-style.kdl"
