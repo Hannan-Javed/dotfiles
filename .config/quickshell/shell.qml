@@ -41,6 +41,7 @@ ShellRoot {
               // Provide a hardcoded or calculated fallback sizing if implicit values are 0
             width: switcherContent.implicitWidth
             height: switcherContent.implicitHeight
+            title: "Customization Center"
 
             visible: true
             onVisibleChanged: {
