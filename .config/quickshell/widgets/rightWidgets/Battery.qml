@@ -33,7 +33,7 @@ Row {
         font.family: Typography.fontFamily
         font.pixelSize: Typography.iconSize
         anchors.verticalCenter: parent.verticalCenter
-        color: batteryCharging ? Colors.green : batteryPercent <= 20 ? Colors.red : Colors.textPrimary
+        color: batteryCharging ? Colors.green : batteryPercent <= Metrics.batteryCritical ? Colors.red : Colors.textPrimary
     }
 
     Text {

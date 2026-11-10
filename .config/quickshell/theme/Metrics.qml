@@ -39,4 +39,7 @@ QtObject {
     readonly property int longUpdateInterval: 5000
     readonly property int systemStatsUpdateInterval: 2000
     readonly property int notificationInterval: 5000
+
+    // ========= CONSTANTS =========
+    readonly property int batteryCritical: 20
 }
