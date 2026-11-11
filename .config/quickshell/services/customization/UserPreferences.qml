@@ -14,10 +14,10 @@ QtObject {
     property string paletteStyle: "purple"
     property string barStyle: "SimpleBar/Bar"
     property string notificationStyle: "SimpleNotification"
-    property string wallpaper: Quickshell.env("HOME") + "Pictures/Wallpapers/wallpaper.jpg"
+    property string wallpaper: "Pictures/Wallpapers/wallpaper.jpg"
     property string kittyStyle: "default-kitty"
     property string niriStyle: "default-niri"
-    property string greetdStyle: "DefaultGreetd"
+    property string greeterStyle: "default-greeter/shell"
     // assign the FileView object to a property name
     property FileView settingsFile
 

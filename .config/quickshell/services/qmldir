@@ -11,11 +11,11 @@ singleton PaletteManager 1.0 customization/managers/PaletteManager.qml
 singleton WallpaperManager 1.0 customization/managers/WallpaperManager.qml
 singleton KittyManager 1.0 customization/managers/KittyManager.qml
 singleton NiriManager 1.0 customization/managers/NiriManager.qml
-# singleton GreetdManager 1.0 customization/managers/GreetdManager.qml
+singleton GreeterManager 1.0 customization/managers/GreeterManager.qml
 
 singleton PresetRegistry 1.0 customization/registeries/PresetRegistry.qml
 singleton PaletteRegistry 1.0 customization/registeries/PaletteRegistry.qml
 singleton BarRegistry 1.0 customization/registeries/BarRegistry.qml
 singleton NotificationRegistry 1.0 customization/registeries/NotificationRegistry.qml
 singleton WallpaperRegistry 1.0 customization/registeries/WallpaperRegistry.qml
-# singleton GreetdRegistry 1.0 customization/registeries/GreetdRegistry.qml
+singleton GreeterRegistry 1.0 customization/registeries/GreeterRegistry.qml
