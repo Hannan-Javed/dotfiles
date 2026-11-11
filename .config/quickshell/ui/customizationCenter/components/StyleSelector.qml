@@ -11,7 +11,7 @@ Item {
     property int selectedIndex: -1
     property real previewRatio: 0.35 // default preview rato
     property var appliedStyle
-    property string previewSource: currentItem && currentItem.preview ? currentItem.preview : appliedStyle && appliedStyle.preview ? appliedStyle.preview : ""
+    property string previewSource: currentItem? currentItem.preview ? currentItem.preview : "" : appliedStyle && appliedStyle.preview ? appliedStyle.preview : ""
     property string previewTitle: currentItem && currentItem.name ? currentItem.name : appliedStyle && appliedStyle.name ? appliedStyle.name : ""
     readonly property var currentItem: items && items.length > 0 ? items[selectedIndex] : null
     property var itemDelegates: ({
