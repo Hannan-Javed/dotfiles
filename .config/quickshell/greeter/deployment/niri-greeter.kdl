@@ -1,0 +1,30 @@
+spawn-sh-at-startup "/var/cache/qs-greeter/qs-greeter/generate-cache.sh; qs -p /var/cache/qs-greeter/current-greeter; niri msg action quit --skip-confirmation"
+
+prefer-no-csd
+
+input {
+	keyboard {
+		//layout "us"
+	}
+}
+
+layout  {
+	gaps 0
+	always-center-single-column
+	background-color "#141317"
+
+	focus-ring {
+		off
+	}
+
+	border {
+		off
+	}
+}
+window-rule {
+    match title="qs-greeter"
+    open-maximized true
+}
+hotkey-overlay {
+    skip-at-startup
+}

@@ -25,7 +25,7 @@ find "$TARGET_DIR" \
 #
 # Copy shared greeter files such as LoginManager, LoginState
 #
-find "$SOURCE_ROOT" \
+find "$SOURCE_ROOT"/shared \
     -maxdepth 1 \
     -type f \
     -name '*.qml' \
@@ -35,3 +35,4 @@ find "$SOURCE_ROOT" \
 # Copy style contents
 #
 cp -r "$STYLE_PATH"/. "$TARGET_DIR"/
+echo "Greeter published to $TARGET_DIR"
