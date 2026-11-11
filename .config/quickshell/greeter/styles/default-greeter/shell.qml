@@ -30,6 +30,16 @@ Window {
         loginManager.selectedSession = LoginState.lastSelectedSession;
     }
 
+    // to make password field the focus automatically on window render
+    Timer {
+        interval: 0
+        running: true
+        repeat: false
+        onTriggered: {
+            passwordField.forceActiveFocus();
+        }
+    }
+
     FileView {
         id: usersFile
 
@@ -265,7 +275,6 @@ Window {
                 onClicked: {
                     loginManager.startLogin();
                 }
-                
 
                 background: Rectangle {
                     radius: 12
