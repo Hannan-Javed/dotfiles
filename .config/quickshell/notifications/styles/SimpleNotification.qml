@@ -62,6 +62,7 @@ Scope {
                         id: notificationRoot
 
                         required property var modelData
+                        property bool animatedIn: false
                         readonly property int hiddenX: width + 50
                         readonly property string previewImage: {
                             // make previewImage use appicon instead
@@ -104,10 +105,7 @@ Scope {
                         Component.onCompleted: {
                             timeoutTimer.interval = Math.max(0, modelData.expireAt - Date.now());
                             timeoutTimer.start();
-                            if (!modelData.animatedIn) {
-                                slide.x = 0;
-                                modelData.animatedIn = true;
-                            }
+                            animatedIn = true;
                         }
 
                         Column {
@@ -221,7 +219,7 @@ Scope {
                         transform: Translate {
                             id: slide
 
-                            x: modelData.animatedIn ? 0 : notificationRoot.hiddenX
+                            x: animatedIn ? 0 : notificationRoot.hiddenX
 
                             Behavior on x {
                                 NumberAnimation {
