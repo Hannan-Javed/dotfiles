@@ -1,4 +1,5 @@
 import "../../../services"
+import "../../../bar"
 import "../../../theme"
 import "../components"
 

@@ -1,6 +1,6 @@
 import "../../services"
 import "../../theme"
-import "./pages"
+import "pages"
 import QtQuick
 import QtQuick.Controls
 import QtQuick.Layouts

@@ -1,4 +1,5 @@
 import "../../../services"
+import "../../../notifications"
 import "../../../theme"
 import "../components"
 

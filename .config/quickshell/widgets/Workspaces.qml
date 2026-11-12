@@ -4,7 +4,7 @@ import QtQuick
 import Quickshell
 
 Item {
-    id: workspacesContainer
+    id: root
 
     property int activeIndex: {
         for (let i = 0; i < Niri.workspaceList.length; i++) {
@@ -31,13 +31,13 @@ Item {
             id: dotItem
 
             required property int index
-            property bool isCurrent: (index === workspacesContainer.activeIndex)
+            property bool isCurrent: (index === root.activeIndex)
 
             height: 8
             radius: 4
             width: isCurrent ? 20 : 8
             color: isCurrent ? "transparent" : Colors.workspaceInactive
-            x: (index * 20) + (index > workspacesContainer.activeIndex ? 12 : 0)
+            x: (index * 20) + (index > root.activeIndex ? 12 : 0)
 
             Behavior on x {
                 NumberAnimation {
@@ -67,7 +67,7 @@ Item {
         width: 20
         radius: 4
         color: Colors.workspaceActive
-        x: (workspacesContainer.activeIndex * 20)
+        x: (root.activeIndex * 20)
 
         Behavior on x {
             NumberAnimation {

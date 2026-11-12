@@ -1,7 +1,8 @@
-import "./bar"
-import "./notifications"
-import "./services"
-import "./ui/customizationCenter"
+import "bar"
+import "notifications"
+import "services"
+import "ui/customizationCenter"
+import "greeter"
 import QtQuick
 import Quickshell
 import Quickshell.Io
