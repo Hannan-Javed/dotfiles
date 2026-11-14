@@ -2,9 +2,9 @@
 
 set -euo pipefail
 
-STYLE_PATH="$(dirname "$HOME/.config/quickshell/greeter/styles/$1")"
+STYLE_PATH="$(dirname "$HOME/.config/quickshell/assets/greeter/styles/$1")"
 
-SOURCE_ROOT="$HOME/.config/quickshell/greeter"
+SOURCE_ROOT="$HOME/.config/quickshell/assets/greeter"
 TARGET_DIR="/var/cache/qs-greeter/current-greeter"
 
 
