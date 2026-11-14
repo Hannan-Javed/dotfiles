@@ -1,4 +1,4 @@
-import "../../../services"
+import ".."
 import QtQuick
 import Quickshell
 import Quickshell.Io
@@ -41,7 +41,7 @@ Item {
     Process {
         id: scanner
 
-        command: ["python3", Quickshell.env("HOME") + "/.config/quickshell/scripts/scanners/scan-styles.py", Quickshell.env("HOME") + "/.config/quickshell/palettes", ".json"]
+        command: ["python3", Quickshell.env("HOME") + "/.config/quickshell/scripts/scanners/scan-styles.py", Quickshell.env("HOME") + "/.config/quickshell/assets/palettes", ".json"]
 
         stdout: StdioCollector {
             onStreamFinished: {

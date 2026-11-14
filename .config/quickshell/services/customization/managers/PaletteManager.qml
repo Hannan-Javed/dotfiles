@@ -1,4 +1,4 @@
-import "../../../services"
+import ".."
 import QtQuick
 pragma Singleton
 

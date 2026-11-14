@@ -1,6 +1,6 @@
-import "../../theme"
 import QtQuick
 import Quickshell.Io
+import qs.theme
 pragma Singleton
 
 Item {

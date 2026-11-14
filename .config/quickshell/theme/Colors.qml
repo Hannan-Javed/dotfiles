@@ -1,5 +1,5 @@
-import "../services"
 import QtQuick
+import qs.services.customization
 pragma Singleton
 
 QtObject {

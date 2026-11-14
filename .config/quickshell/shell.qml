@@ -1,8 +1,7 @@
-import "bar"
-import "notifications"
-import "services"
-import "ui/customizationCenter"
-import "greeter"
+import qs.services.customization
+import qs.modules.bar
+import qs.modules.notifications
+import qs.modules.customizationCenter
 import QtQuick
 import Quickshell
 import Quickshell.Io

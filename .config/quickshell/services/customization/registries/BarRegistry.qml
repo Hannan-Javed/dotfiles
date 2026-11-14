@@ -1,0 +1,48 @@
+import ".."
+import QtQuick
+import Quickshell
+import Quickshell.Io
+pragma Singleton
+
+// scanner of bars in bars/styles directory
+Item {
+    id: root
+
+    property var bars: []
+
+    function reload() {
+        scanner.running = true;
+    }
+
+    function getBar(id) {
+        for (let i = 0; i < bars.length; i++) {
+            if (bars[i].id === id)
+                return bars[i];
+
+        }
+        return null;
+    }
+
+    Component.onCompleted: {
+        RegistryManager.register(root);
+        reload();
+    }
+
+    Process {
+        id: scanner
+
+        command: ["python3", Quickshell.env("HOME") + "/.config/quickshell/scripts/scanners/scan-styles.py", Quickshell.env("HOME") + "/.config/quickshell/modules/bar/styles"]
+
+        stdout: StdioCollector {
+            onStreamFinished: {
+                try {
+                    root.bars = JSON.parse(text.trim());
+                } catch (e) {
+                    console.error("Failed parsing Bar registry:", e);
+                }
+            }
+        }
+
+    }
+
+}

@@ -1,0 +1,44 @@
+import QtQuick
+import Quickshell.Io
+import qs.theme
+
+Rectangle {
+    id: root
+
+    required property string icon
+    required property string command
+    property int iconYOffset: 0
+    property color accent: Colors.red
+
+    width: Metrics.widgetWidth
+    height: Metrics.widgetHeight
+    radius: Metrics.widgetRadius
+    color: mouse.containsMouse ? accent : Colors.rightWidgetIconBackground
+    border.color: accent
+    border.width: 1
+
+    Text {
+        anchors.centerIn: parent
+        text: root.icon
+        color: Colors.white
+        anchors.verticalCenterOffset: iconYOffset
+        font.pixelSize: Typography.boxedIconSize
+    }
+
+    MouseArea {
+        id: mouse
+
+        anchors.fill: parent
+        hoverEnabled: true
+        onClicked: {
+            proc.running = true;
+        }
+    }
+
+    Process {
+        id: proc
+
+        command: ["sh", "-c", root.command]
+    }
+
+}
