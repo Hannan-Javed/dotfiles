@@ -39,3 +39,6 @@
 
 !.config/waypaper/
 !.config/waypaper/**
+
+# ignore pycache everywhere
+*pycache*
