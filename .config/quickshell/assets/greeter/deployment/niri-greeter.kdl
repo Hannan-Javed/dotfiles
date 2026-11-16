@@ -28,3 +28,6 @@ window-rule {
 hotkey-overlay {
     skip-at-startup
 }
+
+// to change styles e.g. wallpapers
+include optional=true "/var/cache/current-greeter/niri-style.kdl"
