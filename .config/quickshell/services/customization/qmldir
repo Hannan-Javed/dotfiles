@@ -1,5 +1,4 @@
 singleton RegistryManager 1.0 RegistryManager.qml
-singleton UIManager 1.0 UIManager.qml
 singleton UserPreferences 1.0 UserPreferences.qml
 
 singleton GreeterManager 1.0 managers/GreeterManager.qml

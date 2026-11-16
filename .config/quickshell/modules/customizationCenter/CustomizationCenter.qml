@@ -2,7 +2,7 @@ import QtQuick
 import QtQuick.Controls
 import QtQuick.Layouts
 import "pages"
-import qs.services.customization
+import qs.services.ui
 import qs.theme
 
 Rectangle {
@@ -38,7 +38,7 @@ Rectangle {
 
     Shortcut {
         sequence: "Escape"
-        onActivated: UIManager.hideAppearanceCenter()
+        onActivated: UIManager.hideOverlay()
     }
 
     ColumnLayout {
