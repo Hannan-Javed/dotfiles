@@ -25,10 +25,16 @@ Rectangle {
             break;
         case Qt.Key_Right:
             // limit dynamically based on items in tabRepeater
-            currentTab = Math.min(currentTab + 1, tabRepeater.count - 1);
+            if (currentTab + 1 > tabRepeater.count - 1)
+                currentTab = 0;
+            else
+                currentTab = currentTab + 1;
             break;
         case Qt.Key_Left:
-            currentTab = Math.max(currentTab - 1, 0);
+            if (currentTab - 1 < 0)
+                currentTab = tabRepeater.count - 1;
+            else
+                currentTab = currentTab - 1;
             break;
         case Qt.Key_Down:
             const page = pages.children[currentTab].forceActiveFocus();
