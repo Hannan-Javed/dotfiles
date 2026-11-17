@@ -128,8 +128,8 @@ Rectangle {
 
                     IconImage {
                         source: modelData.icon !== "" ? modelData.icon : Quickshell.iconPath("fallback")
-                        Layout.preferredWidth: 24
-                        Layout.preferredHeight: 24
+                        implicitWidth: 24
+                        implicitHeight: 24
                         mipmap: true
                     }
 
