@@ -7,6 +7,7 @@ QtObject {
     readonly property color border: PaletteManager.border
     readonly property color textPrimary: PaletteManager.textPrimary
     readonly property color textSecondary: PaletteManager.textSecondary
+    readonly property color black: "#000000"
     readonly property color white: "#ffffff"
     readonly property color red: "#f38ba8"
     readonly property color yellow: "#f9e2af"

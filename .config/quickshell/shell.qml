@@ -1,6 +1,7 @@
 import qs.services.customization
 import qs.modules.bar
 import qs.modules.notifications
+import qs.modules.appLauncher
 import qs.modules.customizationCenter
 import QtQuick
 import Quickshell
@@ -23,6 +24,9 @@ ShellRoot {
     }
 
     CustomizationCenterLoader {
+    }
+
+    AppLauncherLoader {
     }
     
 

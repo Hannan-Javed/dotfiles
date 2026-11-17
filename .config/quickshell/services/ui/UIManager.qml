@@ -6,6 +6,7 @@ QtObject {
     readonly property var overlay: ({
         none: "none",
         customizationCenter: "customizationCenter",
+        appLauncher: "appLauncher",
     })
 
     property string activeOverlay: overlay.none

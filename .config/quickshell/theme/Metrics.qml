@@ -23,6 +23,10 @@ QtObject {
     readonly property int wallpaperTileHeight: 220
     readonly property int wallpaperTileSpacing: 16
 
+    // ========= APP LAUNCHER =========
+    readonly property int appLauncherWidth: 500
+    readonly property int appLauncherHeight: 700
+
     // ========= SPACING =========
     readonly property int widgetSpacing: 7
     readonly property int sideMargin: 16
