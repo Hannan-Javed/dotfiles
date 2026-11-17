@@ -12,12 +12,12 @@ Item {
     }
 
     LazyLoader {
-        id: appearanceCenterLoader
+        id: customizationCenterLoader
 
         active: UIManager.activeOverlay === UIManager.overlay.customizationCenter
 
         component: Window {
-            id: appearanceCenterWindow
+            id: customizationCenterWindow
 
             color: "transparent"
             flags: Qt.Window | Qt.FramelessWindowHint

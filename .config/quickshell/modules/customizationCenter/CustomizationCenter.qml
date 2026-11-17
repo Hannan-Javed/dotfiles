@@ -10,8 +10,8 @@ Rectangle {
 
     property int currentTab: 0
 
-    implicitWidth: Metrics.themeSwitcherWidth
-    implicitHeight: Metrics.themeSwitcherHeight
+    implicitWidth: Metrics.customizationCenterWidth
+    implicitHeight: Metrics.customizationCenterHeight
     color: Colors.background
     opacity: 0.9
     focus: true
