@@ -11,6 +11,18 @@ Window {
     property var users: []
     property var sessions: []
 
+    function applyUserIndex(index) {
+        if (index >= 0 && index < users.length)
+            loginManager.username = users[index].username;
+
+    }
+
+    function applySessionIndex(index) {
+        if (index >= 0 && index < sessions.length)
+            loginManager.selectedSession = sessions[index].exec;
+
+    }
+
     visible: true
     title: "qs-greeter"
     flags: Qt.Window | Qt.FramelessWindowHint
@@ -26,8 +38,16 @@ Window {
         } catch (e) {
             console.warn("Failed loading sessions.json:", e);
         }
-        loginManager.username = LoginState.lastSelectedUser;
-        loginManager.selectedSession = LoginState.lastSelectedSession;
+        const userIndex = users.findIndex((u) => {
+            return u.username === LoginState.lastSelectedUser;
+        });
+        userBox.currentIndex = userIndex >= 0 ? userIndex : 0;
+        applyUserIndex(userBox.currentIndex);
+        const sessionIndex = sessions.findIndex((s) => {
+            return s.exec === LoginState.lastSelectedSession || s.name === LoginState.lastSelectedSession;
+        });
+        sessionsBox.currentIndex = sessionIndex >= 0 ? sessionIndex : 0;
+        applySessionIndex(sessionsBox.currentIndex);
     }
 
     // to make password field the focus automatically on window render
@@ -128,6 +148,7 @@ Window {
             ComboBox {
                 id: userBox
 
+                onActivated: applyUserIndex(index) // userBox
                 width: parent.width
                 height: 44
                 model: users.map((user) => {
@@ -186,6 +207,7 @@ Window {
             ComboBox {
                 id: sessionsBox
 
+                onActivated: applySessionIndex(index) 
                 width: parent.width
                 height: 44
                 model: sessions.map((session) => {

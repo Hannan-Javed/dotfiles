@@ -1,4 +1,4 @@
-spawn-sh-at-startup "/var/cache/qs-greeter/qs-greeter/generate-cache.sh; qs -p /var/cache/qs-greeter/current-greeter; niri msg action quit --skip-confirmation"
+spawn-sh-at-startup "/var/cache/qs-greeter/generate-cache.sh; qs -p /var/cache/qs-greeter/current-greeter; niri msg action quit --skip-confirmation"
 
 prefer-no-csd
 
@@ -30,4 +30,4 @@ hotkey-overlay {
 }
 
 // to change styles e.g. wallpapers
-include optional=true "/var/cache/current-greeter/niri-style.kdl"
+include optional=true "/var/cache/qs-greeter/current-greeter/niri-style.kdl"

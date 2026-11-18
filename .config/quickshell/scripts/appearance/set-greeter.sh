@@ -18,9 +18,7 @@ mkdir -p "$TARGET_DIR"
 #
 # Remove everything currently in current-greeter
 #
-find "$TARGET_DIR" \
-    -mindepth 1 \
-    -exec rm -rf {} +
+rm -rf "$TARGET_DIR" && mkdir -p "$TARGET_DIR"
 
 #
 # Copy shared greeter files such as LoginManager, LoginState

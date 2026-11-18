@@ -1,4 +1,5 @@
 import QtQuick
+import Quickshell
 import Quickshell.Io
 pragma Singleton
 
@@ -149,11 +150,23 @@ Item {
                     }
                     if (obj.WindowOpenedOrChanged) {
                         let w = obj.WindowOpenedOrChanged.window;
-                        let currentMap = windowsMap;
-                        currentMap[w.id] = w;
-                        windowsMap = currentMap;
+                        let nextMap = Object.assign({
+                        }, windowsMap);
+                        nextMap[w.id] = w;
+                        windowsMap = nextMap;
                         if (w.is_focused) {
                             focusedWindowId = w.id;
+                            updateTitleAndIcon();
+                        }
+                    }
+                    if (obj.WindowClosed) {
+                        let closedId = obj.WindowClosed.id;
+                        let nextMap = Object.assign({
+                        }, windowsMap);
+                        delete nextMap[closedId];
+                        windowsMap = nextMap;
+                        if (focusedWindowId === closedId) {
+                            focusedWindowId = 0;
                             updateTitleAndIcon();
                         }
                     }

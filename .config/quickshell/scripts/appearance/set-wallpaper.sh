@@ -4,6 +4,17 @@ set -e
 
 WALLPAPER="$1"
 
+# attach home if not already present
+if [[ "$WALLPAPER" == ~* ]]; then
+    WALLPAPER="${WALLPAPER/#\~/$HOME}"
+elif [[ "$WALLPAPER" != /* ]]; then
+    WALLPAPER="$HOME/$WALLPAPER"
+fi
+if [[ ! -f "$WALLPAPER" ]]; then
+    echo "Wallpaper not found: $WALLPAPER" >&2
+    exit 1
+fi
+
 # FIXED: Extract the file extension from the incoming path (e.g., png or jpg)
 EXT="${WALLPAPER##*.}"
 

@@ -8,7 +8,7 @@ if [ -z "$IF" ]; then
 fi
 
 SSID=$(nmcli -t -f active,ssid dev wifi \
-    | awk -F: '/^yes:/ {print $2; found=1} END {if(!found) print "Disconnected"}')
+    | awk -F: '/^yes:/ { print substr($0, index($0, ":") + 1) }')
 
 SIGNAL=$(nmcli -t -f active,signal dev wifi \
     | awk -F: '/^yes:/ {print $2; exit}')

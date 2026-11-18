@@ -22,8 +22,8 @@ Rectangle {
     }
     property bool keyboardNavigation: false
 
-    width: Metrics.appLauncherWidth
-    height: Metrics.appLauncherHeight
+    implicitWidth: Metrics.appLauncherWidth
+    implicitHeight: Metrics.appLauncherHeight
     color: Colors.background
     focus: true
     Keys.onPressed: (event) => {

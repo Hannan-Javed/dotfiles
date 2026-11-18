@@ -46,7 +46,7 @@ for group_dir in ROOT.iterdir():
             index[preset["id"]] = preset
 
         except Exception as e:
-            print(f"Failed loading {preset_json}: {e}")
+            print(f"Failed loading {preset_json}: {e}",file=sys.stderr)
 
 print(json.dumps({
     "presets": presets,

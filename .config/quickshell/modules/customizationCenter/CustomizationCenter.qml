@@ -3,6 +3,7 @@ import QtQuick.Controls
 import QtQuick.Layouts
 import "pages"
 import qs.services.ui
+import qs.services.customization
 import qs.theme
 
 Rectangle {

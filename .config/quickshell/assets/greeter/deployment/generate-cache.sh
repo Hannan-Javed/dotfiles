@@ -43,3 +43,4 @@ for path in sorted(paths):
 
 with open(f"{CACHE_DIR}/sessions.json", "w") as f:
     json.dump({"sessions": sessions}, f, indent=2)
+EOF

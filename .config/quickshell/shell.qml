@@ -1,10 +1,11 @@
-import qs.services.customization
-import qs.modules.bar
-import qs.modules.notifications
-import qs.modules.appLauncher
-import qs.modules.customizationCenter
 import QtQuick
 import Quickshell
+import qs.modules.appLauncher
+import qs.modules.bar
+import qs.modules.customizationCenter
+import qs.modules.displaySettings
+import qs.modules.notifications
+import qs.services.customization
 
 ShellRoot {
     id: root
