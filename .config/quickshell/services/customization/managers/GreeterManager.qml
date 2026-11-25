@@ -12,7 +12,7 @@ Item {
         if (!currentGreeterStyle)
             return ;
 
-        greeterStyleSetter.command = [Quickshell.env("HOME") + "/.config/quickshell/scripts/appearance/set-greeter.sh", currentGreeterStyle];
+        greeterStyleSetter.command = [Quickshell.shellDir + "/scripts/appearance/set-greeter.sh", currentGreeterStyle];
         greeterStyleSetter.startDetached();
     }
 

@@ -36,7 +36,7 @@ Item {
     Process {
         id: scanner
 
-        command: ["python3", Quickshell.env("HOME") + "/.config/quickshell/scripts/scanners/scan-presets.py", Quickshell.env("HOME") + "/.config/quickshell/assets/presets"]
+        command: ["python3", Quickshell.shellDir + "/scripts/scanners/scan-presets.py", Quickshell.shellDir + "/assets/presets"]
 
         stdout: StdioCollector {
             onStreamFinished: {

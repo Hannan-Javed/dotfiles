@@ -12,7 +12,7 @@ Item {
         if (!currentNiriStyle)
             return ;
 
-        niriStyleSetter.command = [Quickshell.env("HOME") + "/.config/quickshell/scripts/appearance/set-style.sh", currentNiriStyle, Quickshell.env("HOME") + "/.config/niri", "kdl"];
+        niriStyleSetter.command = [Quickshell.shellDir + "/scripts/appearance/set-style.sh", currentNiriStyle, Quickshell.env("HOME") + "/.config/niri", "kdl"];
         niriStyleSetter.startDetached();
     }
 

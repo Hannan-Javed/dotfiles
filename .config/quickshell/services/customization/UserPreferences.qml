@@ -83,7 +83,7 @@ QtObject {
     settingsFile: FileView {
         id: fileComponent
 
-        path: Quickshell.env("HOME") + "/.config/quickshell/user-preferences.json"
+        path: Quickshell.shellDir + "/user-preferences.json"
         blockLoading: true // Important - Enforces immediate I/O completion for singletons otherwise will return empty for load() function
     }
 

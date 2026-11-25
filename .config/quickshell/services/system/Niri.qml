@@ -46,7 +46,7 @@ Item {
 
     function resolveIcon(appId) {
         resolvingAppId = appId;
-        iconResolver.command = ["sh", "-c", `~/.config/quickshell/scripts/get-icon-name.sh "${appId}"`];
+        iconResolver.command = [Quickshell.shellDir + "/scripts/get-icon-name.sh", appId];
         iconResolver.running = true;
     }
 

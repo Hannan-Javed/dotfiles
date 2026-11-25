@@ -31,7 +31,7 @@ Item {
     Process {
         id: scanner
         // add more arguments here if you want more directories to be scanned for wallpapers
-        command: ["python3", Quickshell.env("HOME") + "/.config/quickshell/scripts/scanners/scan-wallpapers.py" ,Quickshell.env("HOME") + "/Pictures/Wallpapers",]
+        command: ["python3", Quickshell.shellDir + "/scripts/scanners/scan-wallpapers.py", Quickshell.env("HOME") + "/Pictures/Wallpapers",]
 
         stdout: StdioCollector {
             onStreamFinished: {

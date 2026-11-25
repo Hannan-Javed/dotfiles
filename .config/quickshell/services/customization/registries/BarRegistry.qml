@@ -31,7 +31,7 @@ Item {
     Process {
         id: scanner
 
-        command: ["python3", Quickshell.env("HOME") + "/.config/quickshell/scripts/scanners/scan-styles.py", Quickshell.env("HOME") + "/.config/quickshell/modules/bar/styles"]
+        command: ["python3", Quickshell.shellDir + "/scripts/scanners/scan-styles.py", Quickshell.shellDir + "/modules/bar/styles"]
 
         stdout: StdioCollector {
             onStreamFinished: {
