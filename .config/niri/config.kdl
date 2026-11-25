@@ -301,7 +301,7 @@ environment {
 }
 
 spawn-at-startup "qs"
-spawn-sh-at-startup "sleep 1 & wayscriber -d"
+spawn-sh-at-startup "wayscriber -d"
 spawn-at-startup "awww-daemon"
 
 // To run a shell command (with variables, pipes, etc.), use spawn-sh-at-startup:
@@ -690,13 +690,15 @@ binds {
     Mod+Shift+B hotkey-overlay-title="Open Firefox (Work Profile)" { spawn-sh "firefox -P Work"; }
     Mod+E hotkey-overlay-title="Open File Manager" { spawn "dolphin"; }
     Mod+Z hotkey-overlay-title="Open IDE" { spawn "codium"; }
-    Mod+A hotkey-overlay-title="Open pCloud" { spawn-sh "wayscriber -d & wayscriber --daemon-toggle"; }
+    Mod+D hotkey-overlay-title="Draw tool" { spawn-sh "wayscriber --daemon-toggle"; }
     Mod+C hotkey-overlay-title="Launch/Close Wayscriber" { spawn-sh "setsid gio launch ~/.config/autostart/pcloud.desktop"; }
     Mod+V hotkey-overlay-title="Open Shotcut" { spawn "~/Downloads/Shotcut.app/shotcut"; }
     Mod+T hotkey-overlay-title="Open Theme Switcher" { 
         spawn-sh "qs ipc call customizationCenter toggleCustomizationCenter"
     }
-
+    Mod+A hotkey-overlay-title="Open App Launcher" { 
+        spawn-sh "qs ipc call appLauncher toggleAppLauncher"
+    }
     // monitor enabling/disabling
 
     // Toggle eDP-2 (internal display) on and off with F1
