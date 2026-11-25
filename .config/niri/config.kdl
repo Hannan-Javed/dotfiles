@@ -374,6 +374,17 @@ window-rule {
     }
 }
 window-rule {
+    match title="App Launcher"
+    open-floating true
+    geometry-corner-radius 0
+    focus-ring {
+        off
+    }
+    shadow {
+        off
+    }
+}
+window-rule {
     // This app-id regular expression will work for both:
     // - host Firefox (app-id is "firefox")
     // - Flatpak Firefox (app-id is "org.mozilla.firefox")

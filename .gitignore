@@ -25,6 +25,7 @@
 !.config/niri/
 !.config/niri/**
 .config/niri/current-style.kdl
+.config/niri/generated-display-config.kdl
 
 !.config/kitty/
 !.config/kitty/**
